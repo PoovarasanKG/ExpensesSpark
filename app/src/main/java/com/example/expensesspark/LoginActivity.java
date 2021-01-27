@@ -54,7 +54,18 @@ public class LoginActivity extends AppCompatActivity {
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+
+        googleSignInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                signIn();
+            }
+        });
     }
+
 
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -97,7 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
                             //Snackbar.make(mBinding.mainLayout, "Authentication Failed.", Snackbar.LENGTH_SHORT).show();
-                            updateUI(null);
+                            //updateUI(null);
                         }
 
                         // [START_EXCLUDE]
@@ -113,10 +124,14 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        //updateUI(currentUser);
     }
 
     private void updateUI(FirebaseUser user) {
+
+        Intent mainActivity = new Intent(this, MainActivity.class);
+        startActivity(mainActivity);
+
         // hideProgressBar();
 //        if (user != null) {
 //            mBinding.status.setText(getString(R.string.google_status_fmt, user.getEmail()));
@@ -133,8 +148,7 @@ public class LoginActivity extends AppCompatActivity {
 //        }
     }
 
-    protected void setGoogleSignInButtonText(SignInButton signInButton, String buttonText)
-    {
+    protected void setGoogleSignInButtonText(SignInButton signInButton, String buttonText) {
         // Find the TextView that is inside of the SignInButton and set its text
         for (int i = 0; i < signInButton.getChildCount(); i++) {
             View v = signInButton.getChildAt(i);

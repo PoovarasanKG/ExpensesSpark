@@ -19,11 +19,11 @@ public class SplashScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
 
-        ImageView iv = findViewById(R.id.appImgView);
+        ImageView appLogoImgView = findViewById(R.id.appImgView);
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.animation);
-        iv.startAnimation(animation);
+        appLogoImgView.startAnimation(animation);
 
-        final Intent i = new Intent(this, LoginActivity.class);
+        final Intent loginActivity = new Intent(this, LoginActivity.class);
 
         Thread timer = new Thread() {
             public void run() {
@@ -32,7 +32,7 @@ public class SplashScreen extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    startActivity(i);
+                    startActivity(loginActivity);
                     finish();
                 }
             }

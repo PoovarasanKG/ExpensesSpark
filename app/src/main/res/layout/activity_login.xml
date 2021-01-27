@@ -26,6 +26,8 @@
             android:adjustViewBounds="false"
             android:background="@drawable/login_background"
             android:scaleType="centerInside"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -44,9 +46,9 @@
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
+            android:layout_marginStart="5dp"
             android:layout_marginTop="50dp"
             android:layout_marginEnd="40dp"
             android:background="#00FFFFFF"
@@ -57,24 +59,32 @@
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView2"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textView2"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="40dp"
+            android:layout_marginTop="15dp"
             android:background="#00FFFFFF"
+            android:lines="2"
             android:text="Let's get started to manage your expenses easily!"
             android:textAlignment="viewStart"
             android:textColor="#585858"
             android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintEnd_toEndOf="@+id/textView"
+            app:layout_constraintStart_toStartOf="@+id/imageView2"
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            android:layout_width="0dp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="40dp"
+            app:layout_constraintStart_toStartOf="@+id/imageView"
+            app:layout_constraintTop_toTopOf="@+id/textView"
+            tools:srcCompat="@mipmap/ic_launcher_round" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
