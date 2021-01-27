@@ -129,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
 
-        Intent mainActivity = new Intent(this, MainActivity.class);
+        Intent mainActivity = new Intent(this, NewAccountActivity.class);
         startActivity(mainActivity);
 
         // hideProgressBar();

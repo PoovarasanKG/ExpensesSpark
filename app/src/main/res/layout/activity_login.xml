@@ -82,9 +82,11 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="40dp"
+            android:background="#00FFFFFF"
+            android:scaleType="fitCenter"
             app:layout_constraintStart_toStartOf="@+id/imageView"
             app:layout_constraintTop_toTopOf="@+id/textView"
-            tools:srcCompat="@mipmap/ic_launcher_round" />
+            tools:srcCompat="@drawable/ic_launcher_foreground" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
