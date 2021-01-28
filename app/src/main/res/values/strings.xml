@@ -104,14 +104,21 @@
     <string name="multi_factor_signed_out">You are not signed in. To use this sample, first navigate to the Email/Password example to sign in and then return here to enroll in multi-factor auth.</string>
     <string name="submit">Submit</string>
 
-    <string-array name="planets_array">
-        <item>Mercury</item>
-        <item>Venus</item>
-        <item>Earth</item>
-        <item>Mars</item>
-        <item>Jupiter</item>
-        <item>Saturn</item>
-        <item>Uranus</item>
-        <item>Neptune</item>
+    <string-array name="Accounttype_array">
+        <item>Select Type</item>
+        <item>Cash</item>
+        <item>credit Card</item>
+        <item>Genreal</item>
+        <item>Saving Account</item>
+        <item>Loan</item>
+        <item>Current Account</item>
+        <item>Bonus</item>
+        <item>Insurance</item>
     </string-array>
+
+    <string-array name="cureency_array">
+        <item>Select Currency</item>
+        <item>INR</item>
+    </string-array>
+
 </resources>
