@@ -107,8 +107,15 @@
     <string name="multi_factor_signed_out">You are not signed in. To use this sample, first navigate to the Email/Password example to sign in and then return here to enroll in multi-factor auth.</string>
     <string name="submit">Submit</string>
 
+    <string name="Dashboard">Dashboard</string>
+    <string name="AddNewTransaction">Add New Transaction</string>
+    <string name="ViewTransaction">View Transaction</string>
+    <string name="Reports">Reports</string>
+    <string name="AccountSettings">Account Settings</string>
+    <string name="SignOut">Sign Out</string>
+
     <string-array name="Accounttype_array">
-        <item>Select Type</item>
+        <item>Select Account</item>
         <item>Cash</item>
         <item>credit Card</item>
         <item>Genreal</item>
@@ -122,6 +129,44 @@
     <string-array name="cureency_array">
         <item>Select Currency</item>
         <item>INR</item>
+    </string-array>
+
+    <string-array name="TransactionType_array">
+        <item>Select Transaction</item>
+        <item>Income</item>
+        <item>Expense</item>
+        <item>Transfer</item>
+    </string-array>
+
+    <string-array name="TransactionAccountType_array">
+        <item>Select Account</item>
+        <item>Cash</item>
+        <item>Bank</item>
+        <item>Credit</item>
+    </string-array>
+
+    <string-array name="Category_array">
+        <item>Select Category</item>
+        <item>Food And Drinks</item>
+        <item>Shopping</item>
+        <item>Transportation</item>
+        <item>Vehicle</item>
+        <item>Life And Entertainment</item>
+        <item>Housing</item>
+        <item>Communication</item>
+        <item>Financial Expenses</item>
+        <item>Investments</item>
+        <item>Income</item>
+        <item>Others</item>
+    </string-array>
+
+    <string-array name="PaymentType_array">
+        <item>Select Payment Mode</item>
+        <item>Cash</item>
+        <item>Debit Card</item>
+        <item>Credit Card</item>
+        <item>UPI</item>
+        <item>Internet Banking</item>
     </string-array>
 
 </resources>

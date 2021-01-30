@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/cardview_light_background"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -15,10 +14,12 @@
     tools:context=".NewAccountActivity"
     tools:showIn="@layout/activity_new_account">
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp">
+
 
         <EditText
             android:id="@+id/AccountName"
@@ -41,12 +42,13 @@
             android:ems="10"
             android:hint="Bank Account Number"
             android:inputType="textCapWords"
-            android:padding="10dp"/>
+            android:padding="10dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
     <Spinner
         android:id="@+id/Accounttype_spinner"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -54,10 +56,11 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"/>
+        android:paddingBottom="@dimen/activity_vertical_margin" />
 
     <Spinner
         android:id="@+id/currency_spinner"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -65,7 +68,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"/>
+        android:paddingBottom="@dimen/activity_vertical_margin" />
 
 
     <Button
@@ -73,13 +76,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:text="@string/submit"
-        android:textAllCaps="false"
         android:padding="10dp"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"/>
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:text="@string/submit"
+        android:textAllCaps="false" />
+
+
 </LinearLayout>
 
 

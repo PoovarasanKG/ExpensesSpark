@@ -1,11 +1,12 @@
 package com.example.expensesspark;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import android.accounts.Account;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,7 +15,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class NewAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class NewAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
+
+{
 
     Button submitBtn;
     EditText accountName;
@@ -22,11 +25,14 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
     Spinner currency_spinner;
     Spinner accountTypeSpinner;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
+
+        getSupportActionBar().setTitle("NewAccountActivity");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Spinner accounttypespinner = (Spinner) findViewById(R.id.Accounttype_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -52,12 +58,9 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
 
             @Override
             public void onClick(View v) {
-                if (validationSuccess())
-                {
+                if (validationSuccess()) {
                     Toast.makeText(getApplicationContext(), "New Account Added", Toast.LENGTH_LONG).show();
-                }
-                else
-                    {
+                } else {
                     //AlertDialog();
                 }
             }
@@ -74,8 +77,7 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
     }
 
     private Boolean validationSuccess() {
-        if (accountName.getText().toString().equalsIgnoreCase(""))
-        {
+        if (accountName.getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(getApplicationContext(), "Please enter account name", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -96,5 +98,28 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
             return false;
         }
         return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu); //your file name
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.item1:
+                //your code
+                // EX : call intent if you want to swich to other activity
+                return true;
+            case R.id.item2:
+                //your code
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

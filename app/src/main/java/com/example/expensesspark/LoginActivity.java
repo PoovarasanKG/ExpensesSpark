@@ -43,6 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //back button code
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         googleSignInBtn = findViewById(R.id.signInButton);
         setGoogleSignInButtonText(googleSignInBtn, "Sign in with Google");
 
