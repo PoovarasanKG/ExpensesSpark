@@ -8,129 +8,173 @@
     android:layout_marginRight="10dp"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".AddTransaction">
+    tools:context=".activity.AddTransaction">
 
-    <Spinner
-        android:id="@+id/transactionTypeSpinner"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:entries="@array/TransactionType_array"
-        android:spinnerMode="dropdown" />
+        android:layout_height="wrap_content">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/amountTxt"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp">
-
-        <com.google.android.material.textfield.TextInputEditText
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Enter transaction amount"
-            android:inputType="numberDecimal"
-            android:textStyle="normal" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:orientation="vertical">
 
-    <Spinner
-        android:id="@+id/accountTypeSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:entries="@array/TransactionAccountType_array"
-        android:spinnerMode="dropdown" />
-
-    <Spinner
-        android:id="@+id/categorySpinner"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:entries="@array/Category_array"
-        android:spinnerMode="dropdown" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:orientation="horizontal">
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/dateTxt"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="0.5">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <TextView
+                android:id="@+id/transactionTypeLbl"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:focusable="false"
-                android:gravity="center"
-                android:hint="Select Date"
-                android:inputType="numberDecimal" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Transaction Type"
+                android:textColor="@color/lightTextColor" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/timeTxt"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_weight="0.5"
-            android:focusable="false">
-
-            <com.google.android.material.textfield.TextInputEditText
+            <Spinner
+                android:id="@+id/transactionTypeSpinner"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:focusable="false"
-                android:hint="Select Time"
-                android:inputType="date" />
-        </com.google.android.material.textfield.TextInputLayout>
-    </LinearLayout>
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:entries="@array/TransactionType_array"
+                android:spinnerMode="dropdown" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/descriptionTxt"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/amountTxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter description"
-            android:inputType="textShortMessage" />
-    </com.google.android.material.textfield.TextInputLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="Enter transaction amount"
+                    android:inputType="numberDecimal"
+                    android:textStyle="normal" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <Spinner
-        android:id="@+id/paymentModeSpinner"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp"
-        android:entries="@array/PaymentType_array"
-        android:spinnerMode="dropdown" />
+            <TextView
+                android:id="@+id/transactionAccountLbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Account"
+                android:textColor="@color/lightTextColor" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/locationTxt"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="10dp">
+            <Spinner
+                android:id="@+id/accountTypeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:entries="@array/TransactionAccountType_array"
+                android:spinnerMode="dropdown" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Enter transaction location"
-            android:inputType="textShortMessage" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/categoryLbl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Category"
+                android:textColor="@color/lightTextColor" />
 
-    <Button
-        android:id="@+id/button"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="200dp"
-        android:layout_height="45dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="25dp"
-        android:background="@drawable/rounded_corners_button"
-        android:hapticFeedbackEnabled="true"
-        android:text="Save"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
+            <Spinner
+                android:id="@+id/categorySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:entries="@array/Category_array"
+                android:spinnerMode="dropdown" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/dateTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.5">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:gravity="center"
+                        android:hint="Select Date"
+                        android:inputType="numberDecimal" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/timeTxt"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="0.5"
+                    android:focusable="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:focusable="false"
+                        android:gravity="center"
+                        android:hint="Select Time"
+                        android:inputType="date" />
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descriptionTxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Enter description"
+                    android:inputType="textShortMessage" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/Location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="Payment Mode"
+                android:textColor="@color/lightTextColor" />
+
+            <Spinner
+                android:id="@+id/paymentModeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp"
+                android:entries="@array/PaymentType_array"
+                android:spinnerMode="dropdown" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/locationTxt"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="5dp">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Enter transaction location"
+                    android:inputType="textShortMessage" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/submitBtn"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="200dp"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="50dp"
+                android:background="@drawable/rounded_corners_button"
+                android:hapticFeedbackEnabled="true"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

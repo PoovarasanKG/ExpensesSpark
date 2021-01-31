@@ -1,4 +1,4 @@
-package com.example.expensesspark;
+package com.example.expensesspark.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.example.expensesspark.R;
 
 public class NewAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 

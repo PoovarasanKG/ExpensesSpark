@@ -1,15 +1,14 @@
-package com.example.expensesspark;
+package com.example.expensesspark.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
-import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
+
+import com.example.expensesspark.R;
 
 public class SplashScreen extends AppCompatActivity {
 

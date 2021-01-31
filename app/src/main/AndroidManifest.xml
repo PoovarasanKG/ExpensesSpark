@@ -3,14 +3,15 @@
     package="com.example.expensesspark">
 
     <application
+        android:name=".app.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <activity android:name=".SplashScreen">
+        <activity android:name=".activity.TransactionsListActivity"></activity>
+        <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action
                     android:name="android.intent.action.MAIN"
@@ -20,26 +21,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:label="@string/app_name1"
             android:screenOrientation="portrait" />
-
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:screenOrientation="portrait" />
-
         <activity
-            android:name=".AddTransaction"
+            android:name=".activity.AddTransaction"
             android:label="Add Transaction"
-            android:parentActivityName=".NewAccountActivity" />
-
+            android:parentActivityName=".activity.NewAccountActivity" />
         <activity
-            android:name=".NewAccountActivity"
+            android:name=".activity.NewAccountActivity"
             android:label="@string/app_name2"
-            android:parentActivityName=".AddTransaction" />
-
+            android:parentActivityName=".activity.AddTransaction" />
     </application>
 
 </manifest>
