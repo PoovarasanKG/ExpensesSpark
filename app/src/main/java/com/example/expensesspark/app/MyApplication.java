@@ -12,7 +12,7 @@ public class MyApplication extends Application {
         Realm.init(this);
         RealmConfiguration config = new RealmConfiguration.Builder()
                 .name("ExpensesSpark.realm")
-                .schemaVersion(10)
+                .schemaVersion(11)
                 .allowWritesOnUiThread(true)
                 .build();
         Realm.setDefaultConfiguration(config);

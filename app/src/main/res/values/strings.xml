@@ -2,6 +2,7 @@
     <string name="app_name">Expenses Spark</string>
     <string name="app_name1">Login Page</string>
     <string name="app_name2">New Account</string>
+    <string name="indian_rupee_symbol">₹</string>
 
 
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
@@ -115,7 +116,7 @@
     <string name="SignOut">Sign Out</string>
 
     <string-array name="Accounttype_array">
-        <item>Select Account</item>
+        <item><b>Select Account</b>></item>
         <item>Cash</item>
         <item>credit Card</item>
         <item>Genreal</item>
@@ -127,26 +128,26 @@
     </string-array>
 
     <string-array name="cureency_array">
-        <item>Select Currency</item>
+        <item><b>Select Currency</b>b></item>
         <item>INR</item>
     </string-array>
 
     <string-array name="TransactionType_array">
-        <item>Select Transaction</item>
+        <item><b>Select Transaction</b></item>
         <item>Income</item>
         <item>Expense</item>
         <item>Transfer</item>
     </string-array>
 
     <string-array name="TransactionAccountType_array">
-        <item>Select Account</item>
+        <item><b>Select Account</b></item>
         <item>Cash</item>
         <item>Bank</item>
         <item>Credit</item>
     </string-array>
 
     <string-array name="Category_array">
-        <item>Select Category</item>
+        <item><b>Select Category</b></item>
         <item>Food And Drinks</item>
         <item>Shopping</item>
         <item>Transportation</item>
@@ -161,12 +162,26 @@
     </string-array>
 
     <string-array name="PaymentType_array">
-        <item>Select Payment Mode</item>
+        <item><b>Select Payment Mode</b></item>
         <item>Cash</item>
         <item>Debit Card</item>
         <item>Credit Card</item>
         <item>UPI</item>
         <item>Internet Banking</item>
+    </string-array>
+
+    <string-array name="AccountType_array">
+        <item><b>Choose an Account Type</b></item>
+        <item>Cash</item>
+        <item>Debit Card</item>
+        <item>Credit Card</item>
+        <item>UPI</item>
+        <item>Internet Banking</item>
+    </string-array>
+
+    <string-array name="currency_array">
+        <item><b>Select Currency</b></item>
+        <item>INR(₹)</item>
     </string-array>
 
 </resources>

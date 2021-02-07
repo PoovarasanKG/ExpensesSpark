@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
 
-        Intent mainActivity = new Intent(this, NewAccountActivity.class);
+        Intent mainActivity = new Intent(this, Dashboard.class);
         startActivity(mainActivity);
 
         // hideProgressBar();
@@ -164,5 +164,4 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    // FirebaseAuth.getInstance().signOut();
 }

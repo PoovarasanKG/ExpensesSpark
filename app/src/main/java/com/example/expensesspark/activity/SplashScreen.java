@@ -9,9 +9,12 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.expensesspark.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SplashScreen extends AppCompatActivity {
 
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +26,17 @@ public class SplashScreen extends AppCompatActivity {
         appLogoImgView.startAnimation(animation);
 
         //final Intent loginActivity = new Intent(this, LoginActivity.class);
-        final Intent loginActivity = new Intent(this, AddTransaction.class);
+        Intent nextActivity;
 
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            nextActivity = new Intent(this, Dashboard.class);
+        } else {
+            nextActivity = new Intent(this, LoginActivity.class);
+        }
 
+        final Intent finalNextActivity = nextActivity;
         Thread timer = new Thread() {
             public void run() {
                 try {
@@ -33,11 +44,11 @@ public class SplashScreen extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    startActivity(loginActivity);
+                    startActivity(finalNextActivity);
                     finish();
                 }
             }
         };
         timer.start();
-}
+    }
 }

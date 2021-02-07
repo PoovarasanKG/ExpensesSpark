@@ -113,8 +113,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                         }
                     });
 
-                }
-                else {
+                } else {
 
                 }
             }
@@ -249,19 +248,17 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         return true;
     }
 
-    private void showData()
-    {
-        List<TransactionTable> transactionTableModels =realm.where(TransactionTable.class).findAll();
+    private void showData() {
+        List<TransactionTable> transactionTableModels = realm.where(TransactionTable.class).findAll();
 
-        for(int i=0;i<transactionTableModels.size();i++)
-        {
+        for (int i = 0; i < transactionTableModels.size(); i++) {
             Toast.makeText(this, "You are added:" + transactionTableModels.get(i).getTransactionType(), Toast.LENGTH_SHORT);
         }
     }
 
     private void showTransactionsListActivity() {
-        Intent mainActivity = new Intent(this, TransactionsListActivity.class);
-        startActivity(mainActivity);
+        Intent transactionsListActivity = new Intent(this, TransactionsListActivity.class);
+        startActivity(transactionsListActivity);
     }
 
 }
