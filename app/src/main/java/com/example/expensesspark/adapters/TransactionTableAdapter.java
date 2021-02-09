@@ -34,7 +34,7 @@ public class TransactionTableAdapter extends RecyclerView.Adapter<TransactionTab
     public void onBindViewHolder(TransactionTableAdapter.TransactionListItem holder, int position) {
         holder.categoryLbl.setText(this.data.get(position).getCategory());
         holder.amountLbl.setText(String.valueOf(this.data.get(position).getAmount()));
-        holder.dateLbl.setText(this.data.get(position).getDate() + this.data.get(position).getTime());
+        holder.dateLbl.setText(this.data.get(position).getDate() + " " + this.data.get(position).getTime());
     }
 
     @Override

@@ -260,7 +260,6 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         Intent transactionsListActivity = new Intent(this, TransactionsListActivity.class);
         startActivity(transactionsListActivity);
     }
-
 }
 
 

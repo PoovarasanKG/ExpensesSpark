@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.example.expensesspark.R;
 import com.example.expensesspark.model.AccountTable;
 import com.example.expensesspark.model.TransactionTable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
@@ -101,8 +102,6 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
                 }
             }
         });
-
-
     }
 
     public void onItemSelected(AdapterView<?> parent, View view,
