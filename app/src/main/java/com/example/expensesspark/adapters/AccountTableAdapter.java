@@ -1,5 +1,6 @@
 package com.example.expensesspark.adapters;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expensesspark.R;
+import com.example.expensesspark.activity.NewAccountActivity;
+import com.example.expensesspark.activity.TransactionDetailsActivity;
 import com.example.expensesspark.model.AccountTable;
 
 import java.util.List;
@@ -30,6 +33,7 @@ public class AccountTableAdapter extends RecyclerView.Adapter<AccountTableAdapte
     public void onBindViewHolder(AccountTableAdapter.AccountListItem holder, int position) {
         holder.categoryLbl.setText(this.data.get(position).getAccountName());
         holder.dateLbl.setText(this.data.get(position).getDateTime());
+        holder.primaryKey = this.data.get(position).getaccountId();
         if (this.data.get(position).getCurrencyType().equalsIgnoreCase("INR(₹)")) {
             holder.amountLbl.setText("₹" + String.valueOf(this.data.get(position).getBalance()));
         }
@@ -46,7 +50,7 @@ public class AccountTableAdapter extends RecyclerView.Adapter<AccountTableAdapte
 
     public static class AccountListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView categoryLbl, amountLbl, dateLbl;
-
+        Long primaryKey;
         public AccountListItem(View view) {
             super(view);
             view.setOnClickListener(this);
@@ -59,6 +63,9 @@ public class AccountTableAdapter extends RecyclerView.Adapter<AccountTableAdapte
         @Override
         public void onClick(View view) {
             Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.categoryLbl.getText(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(view.getContext(), TransactionDetailsActivity.class);
+            intent.putExtra("PrimaryKey", primaryKey);
+            view.getContext().startActivity(intent);
         }
     }
 }
