@@ -5,6 +5,7 @@ public class DetailsModel<name, value>
     private final name nameStr;
     private final value valueStr;
 
+
     public DetailsModel(name nameStr, value valueStr) {
         this.nameStr = nameStr;
         this.valueStr = valueStr;

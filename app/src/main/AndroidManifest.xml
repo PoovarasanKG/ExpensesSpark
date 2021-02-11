@@ -10,7 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.TransactionDetailsActivity"></activity>
+        <activity android:name=".activity.AccountSetings"></activity>
+        <activity android:name=".activity.CommonDetailsActivity" />
         <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action

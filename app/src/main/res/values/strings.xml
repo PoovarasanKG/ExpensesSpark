@@ -184,4 +184,10 @@
         <item>INR(₹)</item>
     </string-array>
 
+    <string-array name="alert_repeat_array">
+        <item><b>Daily</b></item>
+        <item>Weekend(Sunday)</item>
+        <item>Month-End</item>
+    </string-array>
+
 </resources>

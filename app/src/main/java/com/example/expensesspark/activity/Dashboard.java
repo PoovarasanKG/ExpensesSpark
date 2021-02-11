@@ -67,5 +67,10 @@ public class Dashboard extends AppCompatActivity {
             Intent i = new Intent(this, NewAccountActivity.class);
             startActivity(i);
         }
+        else if (position == 5)
+        {
+            Intent i = new Intent(this, AccountSetings.class);
+            startActivity(i);
+        }
     }
 }

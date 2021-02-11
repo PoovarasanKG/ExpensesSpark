@@ -45,6 +45,7 @@ public class DetailsModelAdapter extends RecyclerView.Adapter<DetailsModelAdapte
             view.setOnClickListener(this);
             this.nameLbl = view.findViewById(R.id.nameTv);
             this.valueLbl = view.findViewById(R.id.valueTv);
+
         }
 
         @Override

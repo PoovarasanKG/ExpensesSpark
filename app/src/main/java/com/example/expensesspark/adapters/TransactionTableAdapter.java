@@ -1,6 +1,7 @@
 package com.example.expensesspark.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.expensesspark.R;
+import com.example.expensesspark.activity.CommonDetailsActivity;
 import com.example.expensesspark.model.TransactionTable;
 
 import java.util.ArrayList;
@@ -35,6 +37,7 @@ public class TransactionTableAdapter extends RecyclerView.Adapter<TransactionTab
         holder.categoryLbl.setText(this.data.get(position).getCategory());
         holder.amountLbl.setText(String.valueOf(this.data.get(position).getAmount()));
         holder.dateLbl.setText(this.data.get(position).getDate() + " " + this.data.get(position).getTime());
+        holder.primaryKey = this.data.get(position).getTransactionId();
     }
 
     @Override
@@ -44,7 +47,7 @@ public class TransactionTableAdapter extends RecyclerView.Adapter<TransactionTab
 
     public static class TransactionListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView categoryLbl, amountLbl, dateLbl;
-
+        long primaryKey;
         public TransactionListItem(View view) {
             super(view);
             view.setOnClickListener(this);
@@ -56,6 +59,10 @@ public class TransactionTableAdapter extends RecyclerView.Adapter<TransactionTab
         @Override
         public void onClick(View view) {
             Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.categoryLbl.getText(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(view.getContext(), CommonDetailsActivity.class);
+            intent.putExtra("PrimaryKey", primaryKey);
+            intent.putExtra("ActivityName", "TransactionListActivity");
+            view.getContext().startActivity(intent);
         }
     }
 }

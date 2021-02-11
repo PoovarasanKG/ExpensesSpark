@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.AccountSetings">
+
+    <View
+        android:id="@+id/bg_top_header"
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:background="@drawable/ic_bg_topheader"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/profile_img_view"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/bg_top_header"
+        app:layout_constraintStart_toStartOf="@+id/bg_top_header"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/greetTv"
+        style="@style/TextAppearance.MyTheme.Headline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="1"
+        android:text="Hello abc!"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/bg_top_header"
+        app:layout_constraintStart_toStartOf="@+id/bg_top_header"
+        app:layout_constraintTop_toBottomOf="@+id/profile_img_view" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bg_top_header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/emailValueTv4"
+                style="@style/TextAppearance.MyTheme.Headline5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Profile Info" />
+
+            <TextView
+                android:id="@+id/emailTv7"
+                style="@style/TextAppearance.MyTheme.Subtitle1"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:text="Name"
+                android:textColor="@color/darkTextColor" />
+
+            <TextView
+                android:id="@+id/nameValueTv"
+                style="@style/TextAppearance.MyTheme.Subtitle2"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:text="abc" />
+
+            <TextView
+                android:id="@+id/emailTv"
+                style="@style/TextAppearance.MyTheme.Subtitle1"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="5dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:text="E-mail"
+                android:textColor="@color/darkTextColor" />
+
+            <TextView
+                android:id="@+id/emailValueTv"
+                style="@style/TextAppearance.MyTheme.Subtitle2"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:text="abc@gmail.com" />
+
+            <TextView
+                android:id="@+id/emailValueTv3"
+                style="@style/TextAppearance.MyTheme.Headline5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="Notification Settings" />
+
+            <Switch
+                android:id="@+id/enableNotificationSwitch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:text="Enable notification"
+                android:textColor="@color/darkTextColor" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:text="Reminds about income and expenses of the current month"
+                android:textColor="@color/lightTextColor" />
+
+            <TextView
+                android:id="@+id/emailTv6"
+                style="@style/TextAppearance.MyTheme.Subtitle1"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:text="Repeat"
+                android:textColor="@color/darkTextColor" />
+
+            <Spinner
+                android:id="@+id/repeatNotificationSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:entries="@array/alert_repeat_array" />
+
+            <Button
+                android:id="@+id/logOutBtn"
+                android:layout_width="150dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:background="@drawable/rounded_corners_button"
+                android:text="Log out"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:gravity="center"
+                android:text="------- OR -------" />
+
+            <Button
+                android:id="@+id/deleteAccountBtn"
+                style="@android:style/Widget.DeviceDefault.Button.Borderless.Small"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginRight="0dp"
+                android:text="Delete Account &amp; Log Out"
+                android:textColor="@color/red_600" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
