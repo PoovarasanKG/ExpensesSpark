@@ -10,8 +10,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.AccountSetings"></activity>
-        <activity android:name=".activity.CommonDetailsActivity" />
+        <activity
+            android:name=".activity.AccountSetings"
+            android:label="@string/AccountSettings"
+            android:parentActivityName=".activity.Dashboard" />
+        <activity
+            android:name=".activity.CommonDetailsActivity"
+            android:label="Transaction Details"
+            android:parentActivityName=".activity.Dashboard" />
         <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action
@@ -49,6 +55,12 @@
             android:name=".activity.Dashboard"
             android:label="Dashboard"
             android:parentActivityName=".activity.SplashScreen" />
+        <activity
+            android:name=".activity.ChartActivity">
+            android:label="Chart Report"
+            android:parentActivityName=".activity.Dashboard" />
+        </activity>
+
     </application>
 
 </manifest>

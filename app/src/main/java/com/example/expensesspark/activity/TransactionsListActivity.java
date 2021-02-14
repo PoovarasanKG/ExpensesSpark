@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.expensesspark.R;
 import com.example.expensesspark.adapters.TransactionTableAdapter;
@@ -41,13 +42,22 @@ public class TransactionsListActivity extends AppCompatActivity {
         //SETUP REEALM
         realm = Realm.getDefaultInstance();
 
-        //RETRIEVE
-        TransactionTableHelper helper=new TransactionTableHelper(realm);
-        transactionTableList=helper.retrieveTransactionTableItems();
+        String activityName = getIntent().getStringExtra("ActivityName");
 
-        //BIND
-        adapter=new TransactionTableAdapter(transactionTableList);
-        recyclerView.setAdapter(adapter);
+        if (activityName.equals("Income")) {
+            //RETRIEVE
+            TransactionTableHelper helper=new TransactionTableHelper(realm);
+            transactionTableList=helper.retrieveTransactionItemsByType("Income");
+
+            //BIND
+            adapter=new TransactionTableAdapter(transactionTableList);
+            recyclerView.setAdapter(adapter);
+        }
+        else
+        {
+            Toast.makeText(this,"Please config for show Expense",Toast.LENGTH_SHORT);
+        }
+
 
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override

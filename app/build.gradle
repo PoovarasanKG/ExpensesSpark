@@ -22,6 +22,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
+    }
+
 }
 
 dependencies {
@@ -44,5 +48,6 @@ dependencies {
     implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation 'com.github.bumptech.glide:glide:3.7.0'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 }
 

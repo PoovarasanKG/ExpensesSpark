@@ -18,3 +18,11 @@ public class MyApplication extends Application {
         Realm.setDefaultConfiguration(config);
     }
 }
+
+//    RealmResults<User> results = realm.where(User.class).findAll();
+//    long   sum     = results.sum("age").longValue();
+//    long   min     = results.min("age").longValue();
+//    long   max     = results.max("age").longValue();
+//    double average = results.average("age");
+//
+//    long   matches = results.size();

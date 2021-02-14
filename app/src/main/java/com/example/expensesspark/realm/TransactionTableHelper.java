@@ -5,6 +5,7 @@ import com.example.expensesspark.model.TransactionTable;
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
 import io.realm.RealmResults;
 
 public class TransactionTableHelper {
@@ -37,6 +38,14 @@ public class TransactionTableHelper {
         {
             transactionTableArr.add(String.valueOf(transactionTableListObj.getTransactionId()));
         }
+
+        return transactionTableList;
+    }
+
+    public RealmResults<TransactionTable> retrieveTransactionItemsByType(String transactionType)
+    {
+        RealmResults<TransactionTable> transactionTableList = realm.where(TransactionTable.class)
+                .equalTo("transactionType", transactionType).findAll();
 
         return transactionTableList;
     }

@@ -144,4 +144,5 @@ public class AccountSetings extends AppCompatActivity {
         //commit realm changes
         realm.commitTransaction();
     }
+
 }
