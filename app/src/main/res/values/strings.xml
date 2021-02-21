@@ -3,6 +3,13 @@
     <string name="app_name1">Login Page</string>
     <string name="app_name2">New Account</string>
     <string name="indian_rupee_symbol">₹</string>
+    <string name="Dashboard">Dashboard</string>
+    <string name="AddNewTransaction">Add New Transaction</string>
+    <string name="ViewTransaction">View Transaction</string>
+    <string name="Reports">Reports</string>
+    <string name="AccountSettings">Account Settings</string>
+    <string name="Charts">Charts</string>
+    <string name="SignOut">Sign Out</string>
 
 
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
@@ -107,13 +114,6 @@
     <string name="error_sign_in_failed">Sign in failed, see logs for details.</string>
     <string name="multi_factor_signed_out">You are not signed in. To use this sample, first navigate to the Email/Password example to sign in and then return here to enroll in multi-factor auth.</string>
     <string name="submit">Submit</string>
-
-    <string name="Dashboard">Dashboard</string>
-    <string name="AddNewTransaction">Add New Transaction</string>
-    <string name="ViewTransaction">View Transaction</string>
-    <string name="Reports">Reports</string>
-    <string name="AccountSettings">Account Settings</string>
-    <string name="SignOut">Sign Out</string>
 
     <string-array name="Accounttype_array">
         <item><b>Select Account</b>></item>

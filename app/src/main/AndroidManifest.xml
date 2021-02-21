@@ -15,9 +15,14 @@
             android:label="@string/AccountSettings"
             android:parentActivityName=".activity.Dashboard" />
         <activity
+            android:name=".activity.ChartActivity"
+            android:label="@string/Charts"
+            android:parentActivityName=".activity.Dashboard" />
+        <activity
             android:name=".activity.CommonDetailsActivity"
             android:label="Transaction Details"
             android:parentActivityName=".activity.Dashboard" />
+
         <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action
@@ -55,12 +60,6 @@
             android:name=".activity.Dashboard"
             android:label="Dashboard"
             android:parentActivityName=".activity.SplashScreen" />
-        <activity
-            android:name=".activity.ChartActivity">
-            android:label="Chart Report"
-            android:parentActivityName=".activity.Dashboard" />
-        </activity>
-
     </application>
 
 </manifest>

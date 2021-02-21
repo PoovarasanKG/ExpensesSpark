@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.expensesspark.R;
+import com.example.expensesspark.model.AccountTable;
 import com.example.expensesspark.model.TransactionTable;
 import com.example.expensesspark.realm.TransactionTableHelper;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -83,7 +84,7 @@ public class Dashboard extends AppCompatActivity {
         else if (position == 3)
        {
          Intent i = new Intent(this, AddTransaction.class);
-            startActivity(i);
+         startActivity(i);
        }
         else if (position == 4)
         {
@@ -97,14 +98,11 @@ public class Dashboard extends AppCompatActivity {
         }
     }
 
-    private void showDashboardDetails()
-    {
+    private void showDashboardDetails() {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
         if (acct != null) {
             greetTv.setText("Welcome " + acct.getDisplayName() + "!");
-        }
-        else
-        {
+        } else {
             greetTv.setText("Welcome!");
         }
 
@@ -113,5 +111,12 @@ public class Dashboard extends AppCompatActivity {
         double totalIncomeAmt = incomeTransactionTableResults.sum("amount").doubleValue();
 
         incomeTv.setText("₹" + String.valueOf(totalIncomeAmt));
+
+        RealmQuery<TransactionTable> expenseTransactionTableResults = realm.where(TransactionTable.class)
+                .equalTo("transactionType", "Expense");
+        double totalExpenseAmt = expenseTransactionTableResults.sum("amount").doubleValue();
+
+        incomeTv.setText("₹" + String.valueOf(totalExpenseAmt));
+
     }
 }

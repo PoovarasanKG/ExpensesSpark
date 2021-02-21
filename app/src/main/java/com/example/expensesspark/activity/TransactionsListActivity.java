@@ -50,19 +50,29 @@ public class TransactionsListActivity extends AppCompatActivity {
             transactionTableList=helper.retrieveTransactionItemsByType("Income");
 
             //BIND
-            adapter=new TransactionTableAdapter(transactionTableList);
+            adapter=new TransactionTableAdapter(transactionTableList, activityName);
+            recyclerView.setAdapter(adapter);
+        }
+        else if (activityName.equals("Expense")) {
+            //RETRIEVE
+            TransactionTableHelper helper=new TransactionTableHelper(realm);
+            transactionTableList=helper.retrieveTransactionItemsByType("Expense");
+
+            //BIND
+            adapter=new TransactionTableAdapter(transactionTableList, activityName);
             recyclerView.setAdapter(adapter);
         }
         else
         {
-            Toast.makeText(this,"Please config for show Expense",Toast.LENGTH_SHORT);
+           Toast.makeText(getApplicationContext(),"Please config for List", Toast.LENGTH_SHORT);
         }
-
 
         fabButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent addTransaction = new Intent(getApplicationContext(), AddTransaction.class);
+                addTransaction.putExtra("Activity", "Add");
+                addTransaction.putExtra("ActivityType", "");
                 startActivity(addTransaction);
             }
         });

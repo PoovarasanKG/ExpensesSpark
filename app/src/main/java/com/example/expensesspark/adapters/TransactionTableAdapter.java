@@ -21,9 +21,10 @@ import io.realm.RealmResults;
 
 public class TransactionTableAdapter extends RecyclerView.Adapter<TransactionTableAdapter.TransactionListItem> {
     private List<TransactionTable> data;
-
-    public TransactionTableAdapter (List<TransactionTable> data){
+    private String activityType;
+    public TransactionTableAdapter (List<TransactionTable> data, String activity){
         this.data = data;
+        this.activityType = activity;
     }
 
     @Override
@@ -38,6 +39,7 @@ public class TransactionTableAdapter extends RecyclerView.Adapter<TransactionTab
         holder.amountLbl.setText(String.valueOf(this.data.get(position).getAmount()));
         holder.dateLbl.setText(this.data.get(position).getDate() + " " + this.data.get(position).getTime());
         holder.primaryKey = this.data.get(position).getTransactionId();
+        holder.activityType = this.activityType;
     }
 
     @Override
@@ -48,6 +50,7 @@ public class TransactionTableAdapter extends RecyclerView.Adapter<TransactionTab
     public static class TransactionListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView categoryLbl, amountLbl, dateLbl;
         long primaryKey;
+        String activityType;
         public TransactionListItem(View view) {
             super(view);
             view.setOnClickListener(this);
@@ -62,6 +65,7 @@ public class TransactionTableAdapter extends RecyclerView.Adapter<TransactionTab
             Intent intent = new Intent(view.getContext(), CommonDetailsActivity.class);
             intent.putExtra("PrimaryKey", primaryKey);
             intent.putExtra("ActivityName", "TransactionListActivity");
+            intent.putExtra("ActivityType", activityType);
             view.getContext().startActivity(intent);
         }
     }

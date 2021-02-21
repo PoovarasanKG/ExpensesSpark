@@ -1,9 +1,12 @@
 package com.example.expensesspark.activity;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
@@ -23,6 +26,7 @@ import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 import static android.icu.lang.UCharacter.GraphemeClusterBreak.V;
 
@@ -32,11 +36,13 @@ public class CommonDetailsActivity extends AppCompatActivity {
     Realm realm;
     FloatingActionButton fabBtn;
 
-    private FloatingActionButton fab_main, fab1_mail, fab2_share;
+    private FloatingActionButton menu_button, delete_button, edit_button ;
     private Animation fab_open, fab_close, fab_clock, fab_anticlock;
-    TextView textview_mail, textview_share;
+    TextView edit_text_view, delete_text_view;
 
     Boolean isOpen = false;
+    long primaryKey;
+    String activityName, activityType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,22 +53,24 @@ public class CommonDetailsActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
-        fab_main = findViewById(R.id.fab);
-        fab1_mail = findViewById(R.id.fab1);
-        fab2_share = findViewById(R.id.fab2);
+        menu_button = findViewById(R.id.menu_button);
+        delete_button = findViewById(R.id.delete_button);
+        edit_button = findViewById(R.id.edit_button);
         fab_close = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_close);
         fab_open = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fab_clock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_clock);
         fab_anticlock = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_rotate_anticlock);
 
-        textview_mail = (TextView) findViewById(R.id.textview_mail);
-        textview_share = (TextView) findViewById(R.id.textview_share);
+        edit_text_view = (TextView) findViewById(R.id.edit_text_view);
+        delete_text_view = (TextView) findViewById(R.id.delete_text_view);
 
 
-        String activityName = getIntent().getStringExtra("ActivityName");
+        activityName = getIntent().getStringExtra("ActivityName");
+        activityType = getIntent().getStringExtra("ActivityType");
 
-        long primaryKey = getIntent().getLongExtra("PrimaryKey", 1);
-        Realm realm = Realm.getDefaultInstance();
+
+        primaryKey = getIntent().getLongExtra("PrimaryKey", 1);
+        realm = Realm.getDefaultInstance();
 
         if (activityName.equals("AccountListActivity")) {
 
@@ -126,32 +134,97 @@ public class CommonDetailsActivity extends AppCompatActivity {
         }
 
 
-        fab_main.setOnClickListener(new View.OnClickListener() {
+        menu_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if (isOpen) {
-
-                    textview_mail.setVisibility(View.INVISIBLE);
-                    textview_share.setVisibility(View.INVISIBLE);
-                    fab2_share.startAnimation(fab_close);
-                    fab1_mail.startAnimation(fab_close);
-                    fab_main.startAnimation(fab_anticlock);
-                    fab2_share.setClickable(false);
-                    fab1_mail.setClickable(false);
+                    edit_text_view.setVisibility(View.INVISIBLE);
+                    delete_text_view.setVisibility(View.INVISIBLE);
+                    edit_button.startAnimation(fab_close);
+                    delete_button.startAnimation(fab_close);
+                    menu_button.startAnimation(fab_anticlock);
+                    edit_button.setClickable(false);
+                    delete_button.setClickable(false);
                     isOpen = false;
                 } else {
-                    textview_mail.setVisibility(View.VISIBLE);
-                    textview_share.setVisibility(View.VISIBLE);
-                    fab2_share.startAnimation(fab_open);
-                    fab1_mail.startAnimation(fab_open);
-                    fab_main.startAnimation(fab_clock);
-                    fab2_share.setClickable(true);
-                    fab1_mail.setClickable(true);
+                    edit_text_view.setVisibility(View.VISIBLE);
+                    delete_text_view.setVisibility(View.VISIBLE);
+                    edit_button.startAnimation(fab_open);
+                    delete_button.startAnimation(fab_open);
+                    menu_button.startAnimation(fab_clock);
+                    edit_button.setClickable(true);
+                    delete_button.setClickable(true);
                     isOpen = true;
                 }
 
             }
         });
+
+        edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), AddTransaction.class);
+                i.putExtra("Activity", "Edit");
+                i.putExtra("transactionId", primaryKey);
+                i.putExtra("ActivityType", activityName);
+                startActivity(i);
+            }
+        });
+
+        delete_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog diaBox = AskOption();
+                diaBox.show();
+            }
+        });
+    }
+
+    private AlertDialog AskOption()
+    {
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
+                // set message, title, and icon
+                .setTitle("Alert!")
+                .setMessage("Do you want to delete this transaction?")
+                //.setIcon(R.drawable.add)
+
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //your deleting code
+                        realm.beginTransaction();
+                        RealmResults<TransactionTable> result = realm.where(TransactionTable.class).equalTo("transactionId",primaryKey).findAll();
+                        result.deleteAllFromRealm();
+                        realm.commitTransaction();
+                        dialog.dismiss();
+                        navigateActivity();
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+
+        return myQuittingDialogBox;
+    }
+
+    private void navigateActivity()
+    {
+        if (activityType.equalsIgnoreCase("Income") || activityType.equalsIgnoreCase("Expense"))
+        {
+            Intent transactionsListActivity = new Intent(getApplicationContext(), TransactionsListActivity.class);
+            transactionsListActivity.putExtra("ActivityName", activityType);
+            startActivity(transactionsListActivity);
+        }
+        else
+        {
+            Intent dashboard = new Intent(getApplicationContext(), Dashboard.class);
+            startActivity(dashboard);
+        }
     }
 }

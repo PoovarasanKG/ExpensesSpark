@@ -7,39 +7,38 @@
     tools:context=".activity.ChartActivity">
 
     <com.google.android.material.tabs.TabLayout
-        android:layout_width="match_parent"
+        android:id="@+id/tabLayout"
+        android:layout_width="410dp"
         android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/piechart"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/allTabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="All" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/incomeTabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Income" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/expensesTabItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Expenses" />
-
     </com.google.android.material.tabs.TabLayout>
 
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

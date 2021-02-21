@@ -25,6 +25,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.expensesspark.R;
+import com.example.expensesspark.model.AccountTable;
 import com.example.expensesspark.model.TransactionTable;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -38,6 +39,8 @@ import java.util.Locale;
 import java.util.Objects;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 
 public class AddTransaction extends AppCompatActivity implements View.OnClickListener {
 
@@ -46,7 +49,8 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
     Button saveBtn;
     Spinner transactionTypeSpinner, accountSpinner, categorySpinner, paymentModeSpinner;
     Realm realm;
-
+    String activity, activityType = "";
+    long primaryKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,31 +70,76 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         paymentModeSpinner = (Spinner) findViewById(R.id.paymentModeSpinner);
         saveBtn = (Button) findViewById(R.id.submitBtn);
 
-        String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
-        String currentTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
-
-        selectDate.getEditText().setText(currentDate);
-        selectTime.getEditText().setText(currentTime);
-
         selectTime.getEditText().setOnClickListener(this);
         selectDate.getEditText().setOnClickListener(this);
+
+        activity = getIntent().getStringExtra("Activity");
+        primaryKey = getIntent().getLongExtra("transactionId", 0);
+        activityType = getIntent().getStringExtra("ActivityType");
+
+        if (activity.equals("Edit"))
+        {
+            RealmQuery<TransactionTable> realmQuery = realm.where(TransactionTable.class)
+                    .equalTo("transactionId", primaryKey);
+            TransactionTable transactionTablelObj = realmQuery.findAll().first();
+
+            if (transactionTablelObj.getTransactionType().equalsIgnoreCase("Income"))
+            {
+                transactionTypeSpinner.setSelection(1);
+            }
+            else if (transactionTablelObj.getTransactionType().equalsIgnoreCase("Expense"))
+            {
+                transactionTypeSpinner.setSelection(2);
+            }
+            else if (transactionTablelObj.getTransactionType().equalsIgnoreCase("Transfer"))
+            {
+                transactionTypeSpinner.setSelection(3);
+            }
+
+            amountTxt.getEditText().setText(String.valueOf(transactionTablelObj.getAmount()));
+            selectDate.getEditText().setText(transactionTablelObj.getDate());
+            selectTime.getEditText().setText(transactionTablelObj.getTime());
+            descriptionTxt.getEditText().setText(transactionTablelObj.getDescription());
+        }
+        else
+        {
+            String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());
+            String currentTime = new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
+
+            selectDate.getEditText().setText(currentDate);
+            selectTime.getEditText().setText(currentTime);
+        }
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (validationSuccess()) {
-                    Toast.makeText(getApplicationContext(), "New Account Added", Toast.LENGTH_LONG).show();
+
+                    if (activity.equals("Edit"))
+                    {
+                        Toast.makeText(getApplicationContext(), "Transaction Updated Successfully", Toast.LENGTH_LONG).show();
+                    }
+                    else
+                    {
+                        Toast.makeText(getApplicationContext(), "Transaction Added Successfully", Toast.LENGTH_LONG).show();
+                    }
 
                     final TransactionTable transactionTableModelObj = new TransactionTable();
 
-                    Number current_id = realm.where(TransactionTable.class).max("transactionId");
                     long nextId;
 
-                    if (current_id == null) {
-                        nextId = 1;
-                    } else {
-                        nextId = current_id.intValue() + 1;
+                    if (activity.equalsIgnoreCase("Edit"))
+                    {
+                        nextId = primaryKey;
+                    }
+                    else {
+                        Number current_id = realm.where(TransactionTable.class).max("transactionId");
+                        if (current_id == null) {
+                            nextId = 1;
+                        } else {
+                            nextId = current_id.intValue() + 1;
+                        }
                     }
 
                     transactionTableModelObj.setTransactionId(nextId);
@@ -107,7 +156,8 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            realm.copyToRealm(transactionTableModelObj);
+                            realm.insertOrUpdate(transactionTableModelObj);
+                                    //copyToRealm(transactionTableModelObj);
                             //showData();
                             showTransactionsListActivity();
                         }
@@ -224,27 +274,38 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(getApplicationContext(), "Please select transaction type", Toast.LENGTH_SHORT).show();
             return false;
         }
-
-        if (accountSpinner.getSelectedItemPosition() == 0) {
-            Toast.makeText(getApplicationContext(), "Please select account", Toast.LENGTH_SHORT).show();
-            return false;
-        }
-
         if ((amountTxt.getEditText().getText().toString().equalsIgnoreCase("")) && (amountTxt.getEditText().getText().toString().equalsIgnoreCase("0"))) {
             Toast.makeText(getApplicationContext(), "Please enter the transaction amount", Toast.LENGTH_LONG).show();
             return false;
         }
-
+        if (accountSpinner.getSelectedItemPosition() == 0) {
+            Toast.makeText(getApplicationContext(), "Please select account", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (categorySpinner.getSelectedItemPosition() == 0) {
+            Toast.makeText(getApplicationContext(), "Please select category type", Toast.LENGTH_SHORT).show();
+            return false;
+        }
         if (selectDate.getEditText().getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(getApplicationContext(), "Please select date", Toast.LENGTH_LONG).show();
             return false;
         }
-
         if (selectTime.getEditText().getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(getApplicationContext(), "Please select time", Toast.LENGTH_SHORT).show();
             return false;
         }
-
+        if (descriptionTxt.getEditText().getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(getApplicationContext(), "Please enter description", Toast.LENGTH_LONG).show();
+            return false;
+        }
+        if (paymentModeSpinner.getSelectedItemPosition() == 0) {
+            Toast.makeText(getApplicationContext(), "Please select payment mode", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (locationTxt.getEditText().getText().toString().equalsIgnoreCase("")) {
+            Toast.makeText(getApplicationContext(), "Please enter location", Toast.LENGTH_LONG).show();
+            return false;
+        }
         return true;
     }
 
@@ -257,8 +318,24 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
     }
 
     private void showTransactionsListActivity() {
-        Intent transactionsListActivity = new Intent(this, TransactionsListActivity.class);
-        startActivity(transactionsListActivity);
+
+        if (activityType.equalsIgnoreCase("Income") || transactionTypeSpinner.getSelectedItem().toString().equalsIgnoreCase("Income"))
+        {
+            Intent transactionsListActivity = new Intent(this, TransactionsListActivity.class);
+            transactionsListActivity.putExtra("ActivityName", "Income");
+            startActivity(transactionsListActivity);
+        }
+        else if (activityType.equalsIgnoreCase("Expense") || transactionTypeSpinner.getSelectedItem().toString().equalsIgnoreCase("Expense"))
+        {
+            Intent transactionsListActivity = new Intent(this, TransactionsListActivity.class);
+            transactionsListActivity.putExtra("ActivityName", "Expense");
+            startActivity(transactionsListActivity);
+        }
+        else
+        {
+            Intent dashboard = new Intent(this, Dashboard.class);
+            startActivity(dashboard);
+        }
     }
 }
 

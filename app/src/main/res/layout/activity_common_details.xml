@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview_share"
+        android:id="@+id/delete_text_view"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -29,11 +29,11 @@
         android:text="Delete"
         android:textColor="@color/white_50"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/fab2"
-        app:layout_constraintEnd_toStartOf="@+id/fab2" />
+        app:layout_constraintBottom_toBottomOf="@+id/delete_button"
+        app:layout_constraintEnd_toStartOf="@+id/delete_button" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab2"
+        android:id="@+id/delete_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -45,14 +45,14 @@
         android:focusable="true"
         android:visibility="invisible"
         app:backgroundTint="#ffffff"
-        app:layout_constraintBottom_toTopOf="@+id/fab1"
-        app:layout_constraintEnd_toEndOf="@+id/fab1"
+        app:layout_constraintBottom_toTopOf="@+id/edit_button"
+        app:layout_constraintEnd_toEndOf="@+id/edit_button"
         app:pressedTranslationZ="12dp"
         app:srcCompat="@drawable/deletebin_b" />
 
 
     <TextView
-        android:id="@+id/textview_mail"
+        android:id="@+id/edit_text_view"
         android:layout_width="80dp"
         android:layout_height="34dp"
         android:layout_alignParentEnd="true"
@@ -65,13 +65,13 @@
         android:text="Edit"
         android:textColor="@color/white_50"
         android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="@+id/fab1"
-        app:layout_constraintEnd_toEndOf="@+id/textview_share"
-        app:layout_constraintTop_toBottomOf="@+id/textview_share"
+        app:layout_constraintBottom_toBottomOf="@+id/edit_button"
+        app:layout_constraintEnd_toEndOf="@+id/delete_text_view"
+        app:layout_constraintTop_toBottomOf="@+id/delete_text_view"
         app:layout_constraintVertical_bias="1.0" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab1"
+        android:id="@+id/edit_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -83,14 +83,14 @@
         android:focusable="true"
         android:visibility="invisible"
         app:backgroundTint="#ffffff"
-        app:layout_constraintBottom_toTopOf="@+id/fab"
-        app:layout_constraintEnd_toEndOf="@+id/fab"
+        app:layout_constraintBottom_toTopOf="@+id/menu_button"
+        app:layout_constraintEnd_toEndOf="@+id/menu_button"
         app:pressedTranslationZ="12dp"
         app:srcCompat="@drawable/edit_b" />
 
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/menu_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
