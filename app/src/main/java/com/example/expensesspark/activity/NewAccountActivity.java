@@ -28,10 +28,9 @@ import java.util.List;
 import java.util.Locale;
 
 import io.realm.Realm;
+import io.realm.RealmQuery;
 
-public class NewAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
-
-{
+public class NewAccountActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     Button submitButton;
     TextInputLayout accountName;
@@ -41,8 +40,7 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
     Realm realm;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_account);
 
@@ -94,8 +92,9 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
                         public void execute(Realm realm) {
                             realm.copyToRealm(AccountTableModelObj);
                             //showData();
-                            showTransactionsListActivity();                        }
-                    });                   
+                            showTransactionsListActivity();
+                        }
+                    });
 
                 } else {
                     //AlertDialog();
@@ -112,39 +111,46 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
     }
 
     private Boolean validationSuccess() {
-        if (accountName.getEditText().toString().equalsIgnoreCase("")) {
+
+        if (accountName.getEditText().getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(getApplicationContext(), "Please enter account name", Toast.LENGTH_LONG).show();
             return false;
         }
 
-        if (bankAccountNumber.getEditText().toString().equalsIgnoreCase("")) {
+        if (bankAccountNumber.getEditText().getText().toString().equalsIgnoreCase("")) {
             Toast.makeText(getApplicationContext(), "Please enter account number", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        if (currntBalance.getEditText().toString().equalsIgnoreCase("")) {
-            Toast.makeText(getApplicationContext(), "Please enter currentbalence", Toast.LENGTH_SHORT).show();
+        if (currntBalance.getEditText().getText().toString().equalsIgnoreCase("") && (currntBalance.getEditText().getText().toString().equalsIgnoreCase("0"))) {
+            Toast.makeText(getApplicationContext(), "Please enter current balence", Toast.LENGTH_SHORT).show();
             return false;
         }
 
         if (accountTypeSpinner.getSelectedItemPosition() == 0) {
             Toast.makeText(getApplicationContext(), "Please enter account type", Toast.LENGTH_SHORT).show();
             return false;
+        } else {
+            RealmQuery<AccountTable> accountTableResults = realm.where(AccountTable.class)
+                    .equalTo("accountType", accountTypeSpinner.getSelectedItem().toString());
+            if (accountTableResults.count() > 0) {
+                Toast.makeText(getApplicationContext(), "You've already added this account type", Toast.LENGTH_SHORT).show();
+                return false;
+            }
         }
 
         if (currency_spinner.getSelectedItemPosition() == 0) {
             Toast.makeText(getApplicationContext(), "Please enter currency ", Toast.LENGTH_SHORT).show();
             return false;
         }
+
         return true;
     }
 
-    private void showData()
-    {
-        List<TransactionTable> transactionTableModels =realm.where(TransactionTable.class).findAll();
+    private void showData() {
+        List<TransactionTable> transactionTableModels = realm.where(TransactionTable.class).findAll();
 
-        for(int i=0;i<transactionTableModels.size();i++)
-        {
+        for (int i = 0; i < transactionTableModels.size(); i++) {
             Toast.makeText(this, "You are added:" + transactionTableModels.get(i).getTransactionType(), Toast.LENGTH_SHORT);
         }
     }

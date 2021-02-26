@@ -145,9 +145,9 @@ public class ChartActivity extends AppCompatActivity {
         pieEntries = new ArrayList<>();
         pieEntries.add(new PieEntry((float) income, 0));
         pieEntries.add(new PieEntry((float) expense, 1));
-        pieEntries.add(new PieEntry((float) transfer, 2));
+       // pieEntries.add(new PieEntry((float) transfer, 2));
 
-        pieDataSet = new PieDataSet(pieEntries, "Income, Expense, Transfer");
+        pieDataSet = new PieDataSet(pieEntries, "Income, Expense");
         pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
@@ -296,9 +296,9 @@ public class ChartActivity extends AppCompatActivity {
         pieEntries = new ArrayList<>();
         pieEntries.add(new PieEntry((float) income, 0));
         pieEntries.add(new PieEntry((float) expense, 1));
-        pieEntries.add(new PieEntry((float) transfer, 2));
+       // pieEntries.add(new PieEntry((float) transfer, 2));
 
-        pieDataSet = new PieDataSet(pieEntries, "Income, Expense, Transfer");
+        pieDataSet = new PieDataSet(pieEntries, "Income, Expense");
         pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);

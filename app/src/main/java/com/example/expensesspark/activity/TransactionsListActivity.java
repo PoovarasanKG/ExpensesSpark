@@ -77,6 +77,9 @@ public class TransactionsListActivity extends AppCompatActivity {
             }
         });
     }
-
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
+    }
 
 }

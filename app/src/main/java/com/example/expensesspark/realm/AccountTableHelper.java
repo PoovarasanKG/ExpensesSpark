@@ -41,4 +41,11 @@ public class AccountTableHelper {
 
         return AccountTableList;
     }
+   // public RealmResults<AccountTable> retrieveAccountTableItemsByType(String accountType)
+   // {
+   //     RealmResults<AccountTable> accountTableList = realm.where(AccountTable.class)
+  //              .equalTo("Accounts", accountType).findAll();
+
+   //     return accountTableList;
+ //   }
 }

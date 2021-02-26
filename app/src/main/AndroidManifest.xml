@@ -14,6 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.ReportActivity"></activity>
         <activity
             android:name=".activity.AccountSetings"
             android:label="@string/AccountSettings"
@@ -24,9 +25,8 @@
             android:parentActivityName=".activity.Dashboard" />
         <activity
             android:name=".activity.CommonDetailsActivity"
-            android:label="Transaction Details"
+            android:label="Details"
             android:parentActivityName=".activity.Dashboard" />
-
         <activity android:name=".activity.SplashScreen">
             <intent-filter>
                 <action
@@ -47,35 +47,36 @@
         <activity
             android:name=".activity.AddTransaction"
             android:label="Add Transaction"
-            android:parentActivityName=".activity.NewAccountActivity" />
+            android:parentActivityName=".activity.Dashboard" />
         <activity
             android:name=".activity.NewAccountActivity"
             android:label="@string/app_name2"
-            android:parentActivityName=".activity.AddTransaction" />
+            android:parentActivityName=".activity.Dashboard" />
         <activity
             android:name=".activity.TransactionsListActivity"
             android:label="Transaction List"
-            android:parentActivityName=".activity.AddTransaction" />
+            android:parentActivityName=".activity.Dashboard" />
         <activity
             android:name=".activity.AccountListActivity"
             android:label="Account List"
-            android:parentActivityName=".activity.AccountListActivity" />
+            android:parentActivityName=".activity.Dashboard" />
         <activity
             android:name=".activity.Dashboard"
             android:label="Dashboard"
             android:parentActivityName=".activity.SplashScreen" />
 
         <receiver android:name=".app.NotificationHelper" />
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.expensesspark.example.provider"
             android:exported="false"
             android:grantUriPermissions="true">
+
             <!-- ressource file to create -->
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths">
-            </meta-data>
+                android:resource="@xml/file_paths"></meta-data>
         </provider>
     </application>
 

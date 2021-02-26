@@ -134,7 +134,7 @@ public class Dashboard extends AppCompatActivity {
         cashTv.setText("₹" + String.valueOf(totalCashAmt));
 
         RealmQuery<AccountTable> bankAccountTableResults = realm.where(AccountTable.class)
-                .equalTo("accountType", "Saving Account");
+                .equalTo("accountType", "Bank");
         double totalBankAmt = bankAccountTableResults.sum("balance").doubleValue();
 
         savingAccountTv.setText("₹" + String.valueOf(totalBankAmt));

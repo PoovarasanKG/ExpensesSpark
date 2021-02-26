@@ -42,7 +42,7 @@ public class CommonDetailsActivity extends AppCompatActivity {
 
     Boolean isOpen = false;
     long primaryKey;
-    String activityName, activityType;
+    String activityName, activityType, listType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +73,7 @@ public class CommonDetailsActivity extends AppCompatActivity {
         realm = Realm.getDefaultInstance();
 
         if (activityName.equals("AccountListActivity")) {
-
+            listType = "account";
             RealmQuery<AccountTable> realmQuery = realm.where(AccountTable.class)
                     .equalTo("accountId", primaryKey);
             //RealmResults<AccountTable> AccountTableList = realmQuery.findAll();
@@ -100,6 +100,8 @@ public class CommonDetailsActivity extends AppCompatActivity {
 
 
         } else if (activityName.equals("TransactionListActivity")) {
+            listType = "transaction";
+
             RealmQuery<TransactionTable> realmQuery = realm.where(TransactionTable.class)
                     .equalTo("transactionId", primaryKey);
             //RealmResults<AccountTable> AccountTableList = realmQuery.findAll();
@@ -131,6 +133,10 @@ public class CommonDetailsActivity extends AppCompatActivity {
             DetailsModelAdapter adapter = new DetailsModelAdapter(detailsModelList);
             recyclerView.setAdapter(adapter);
 
+        }
+        else
+        {
+            listType = "";
         }
 
 
@@ -186,20 +192,25 @@ public class CommonDetailsActivity extends AppCompatActivity {
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
                 // set message, title, and icon
                 .setTitle("Alert!")
-                .setMessage("Do you want to delete this transaction?")
+                .setMessage("Do you want to delete this " + listType + "?")
                 //.setIcon(R.drawable.add)
 
                 .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //your deleting code
-                        realm.beginTransaction();
-                        RealmResults<TransactionTable> result = realm.where(TransactionTable.class).equalTo("transactionId",primaryKey).findAll();
-                        result.deleteAllFromRealm();
-                        realm.commitTransaction();
-                        dialog.dismiss();
-                        navigateActivity();
-                    }
+                        if (activityName.equals("AccountListActivity")) {
+
+                        }
+                        else  if (activityName.equals("TransactionListActivity")) {
+                            realm.beginTransaction();
+                            RealmResults<TransactionTable> result = realm.where(TransactionTable.class).equalTo("transactionId",primaryKey).findAll();
+                            result.deleteAllFromRealm();
+                            realm.commitTransaction();
+                            dialog.dismiss();
+                            navigateActivity();
+                        }
+                        }
 
                 })
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
@@ -220,6 +231,11 @@ public class CommonDetailsActivity extends AppCompatActivity {
             Intent transactionsListActivity = new Intent(getApplicationContext(), TransactionsListActivity.class);
             transactionsListActivity.putExtra("ActivityName", activityType);
             startActivity(transactionsListActivity);
+        }
+        else if (activityType.equalsIgnoreCase("Accounts"))
+        {
+            Intent accountListActivity = new Intent(this, AccountListActivity.class);
+            startActivity(accountListActivity);
         }
         else
         {

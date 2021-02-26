@@ -52,7 +52,7 @@ public class AccountListActivity extends AppCompatActivity {
         accountTableList = helper.retrieveAccountTableItems();
 
         //BIND
-        adapter=new AccountTableAdapter(accountTableList);
+        adapter=new AccountTableAdapter(accountTableList,"Accounts");
         recyclerView.setAdapter(adapter);
 
         fabBtn.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +62,10 @@ public class AccountListActivity extends AppCompatActivity {
                 startActivity(newAccountActivity);
             }
         });
+    }
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
     }
 
 }

@@ -17,9 +17,12 @@ import java.util.List;
 
 public class AccountTableAdapter extends RecyclerView.Adapter<AccountTableAdapter.AccountListItem> {
     private List<AccountTable> data;
+    private String activityType;
 
-    public AccountTableAdapter(List<AccountTable> data){
+
+    public AccountTableAdapter(List<AccountTable> data, String activity){
         this.data = data;
+        this.activityType = activity;
     }
 
     @Override
@@ -33,6 +36,8 @@ public class AccountTableAdapter extends RecyclerView.Adapter<AccountTableAdapte
         holder.categoryLbl.setText(this.data.get(position).getAccountName());
         holder.dateLbl.setText(this.data.get(position).getDateTime());
         holder.primaryKey = this.data.get(position).getaccountId();
+        holder.activityType = this.activityType;
+
 
 
         if (this.data.get(position).getCurrencyType().equalsIgnoreCase("INR(₹)")) {
@@ -52,6 +57,7 @@ public class AccountTableAdapter extends RecyclerView.Adapter<AccountTableAdapte
     public static class AccountListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView categoryLbl, amountLbl, dateLbl;
         long primaryKey;
+        String activityType;
 
         public AccountListItem(View view) {
             super(view);
@@ -67,6 +73,7 @@ public class AccountTableAdapter extends RecyclerView.Adapter<AccountTableAdapte
             Intent intent = new Intent(view.getContext(), CommonDetailsActivity.class);
             intent.putExtra("PrimaryKey", primaryKey);
             intent.putExtra("ActivityName", "AccountListActivity");
+            intent.putExtra("ActivityType", activityType);
             view.getContext().startActivity(intent);
         }
     }

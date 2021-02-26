@@ -116,6 +116,34 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (validationSuccess()) {
 
+                    RealmQuery<AccountTable> accountTableResults = realm.where(AccountTable.class)
+                            .equalTo("accountType", accountSpinner.getSelectedItem().toString());
+
+                    if (accountTableResults.count() > 0) {
+                        final AccountTable accountTableObj = accountTableResults.findFirst();
+                        Double enteredAmt = Double.parseDouble(amountTxt.getEditText().getText().toString());
+                        Double balanceAmt = 0.0;
+
+                        if (transactionTypeSpinner.getSelectedItem().toString().equalsIgnoreCase("Expense"))
+                        {
+                            balanceAmt = accountTableObj.getBalance() - enteredAmt;
+                        }
+                        else if (transactionTypeSpinner.getSelectedItem().toString().equalsIgnoreCase("Income"))
+                        {
+                            balanceAmt = accountTableObj.getBalance() + enteredAmt;
+                        }
+
+                        final Double finalBalanceAmt = balanceAmt;
+
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                accountTableObj.setBalance(finalBalanceAmt);
+                                realm.insertOrUpdate(accountTableObj);
+                            }
+                        });
+                    }
+
                     if (activity.equalsIgnoreCase("Edit"))
                     {
                         Toast.makeText(getApplicationContext(), "Transaction Updated Successfully", Toast.LENGTH_LONG).show();
@@ -278,10 +306,36 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
             Toast.makeText(getApplicationContext(), "Please enter the transaction amount", Toast.LENGTH_LONG).show();
             return false;
         }
+
         if (accountSpinner.getSelectedItemPosition() == 0) {
             Toast.makeText(getApplicationContext(), "Please select account", Toast.LENGTH_SHORT).show();
             return false;
         }
+
+        RealmQuery<AccountTable> accountTableResults = realm.where(AccountTable.class)
+                .equalTo("accountType", accountSpinner.getSelectedItem().toString());
+        if (accountTableResults.count() == 0)
+        {
+            Toast.makeText(getApplicationContext(), "You've not added this account. Please add from Accounts.", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else if (accountTableResults.count() > 0)
+        {
+            AccountTable accountTableObj = accountTableResults.findFirst();
+
+            Double enteredAmt = Double.parseDouble(amountTxt.getEditText().getText().toString());
+            Double balanceAmt = accountTableObj.getBalance();
+
+            if (transactionTypeSpinner.getSelectedItem().toString().equalsIgnoreCase("Expense"))
+            {
+                if (balanceAmt < enteredAmt)
+                {
+                    Toast.makeText(getApplicationContext(), "You've not sufficient balance. Try with another or load amount from Accounts.", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            }
+        }
+
         if (categorySpinner.getSelectedItemPosition() == 0) {
             Toast.makeText(getApplicationContext(), "Please select category type", Toast.LENGTH_SHORT).show();
             return false;
