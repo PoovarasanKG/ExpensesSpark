@@ -176,18 +176,18 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         realm.close();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+//    @Override
+ //   public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
 //        getMenuInflater().inflate(R.menu.menu_patient_home_screen, menu);
-        menu.add(0, 1, 1, menuIconWithText(ContextCompat.getDrawable(getApplicationContext(), R.drawable.home), getResources().getString(R.string.Dashboard)));
-        menu.add(0, 2, 2, menuIconWithText(ContextCompat.getDrawable(getApplicationContext(), R.drawable.add), getResources().getString(R.string.AddNewTransaction)));
-        menu.add(0, 3, 3, menuIconWithText(ContextCompat.getDrawable(getApplicationContext(), R.drawable.details), getResources().getString(R.string.ViewTransaction)));
-        menu.add(0, 4, 4, menuIconWithText(ContextCompat.getDrawable(getApplicationContext(), R.drawable.analytics), getResources().getString(R.string.Reports)));
-        menu.add(0, 4, 4, menuIconWithText(ContextCompat.getDrawable(getApplicationContext(), R.drawable.settings), getResources().getString(R.string.AccountSettings)));
-        return true;
+//        menu.add(0, 1, 1, menuIconWithText(ContextCompat.getDrawable(getApplicationContext(), R.drawable.home), getResources().getString(R.string.Dashboard)));
+ //       menu.add(0, 2, 2, menuIconWithText(ContextCompat.getDrawable(getApplicationContext(), R.drawable.add), getResources().getString(R.string.AddNewTransaction)));
+ //       menu.add(0, 3, 3, menuIconWithText(ContextCompat.getDrawable(getApplicationContext(), R.drawable.details), getResources().getString(R.string.ViewTransaction)));
+ //       menu.add(0, 4, 4, menuIconWithText(ContextCompat.getDrawable(getApplicationContext(), R.drawable.analytics), getResources().getString(R.string.Reports)));
+//        menu.add(0, 4, 4, menuIconWithText(ContextCompat.getDrawable(getApplicationContext(), R.drawable.settings), getResources().getString(R.string.AccountSettings)));
+//        return true;
 
-    }
+ //   }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

@@ -34,6 +34,7 @@ public class AccountTableAdapter extends RecyclerView.Adapter<AccountTableAdapte
         holder.dateLbl.setText(this.data.get(position).getDateTime());
         holder.primaryKey = this.data.get(position).getaccountId();
 
+
         if (this.data.get(position).getCurrencyType().equalsIgnoreCase("INR(₹)")) {
             holder.amountLbl.setText("₹" + String.valueOf(this.data.get(position).getBalance()));
         }
@@ -51,6 +52,7 @@ public class AccountTableAdapter extends RecyclerView.Adapter<AccountTableAdapte
     public static class AccountListItem extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView categoryLbl, amountLbl, dateLbl;
         long primaryKey;
+
         public AccountListItem(View view) {
             super(view);
             view.setOnClickListener(this);

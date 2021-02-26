@@ -3,6 +3,7 @@ package com.example.expensesspark.activity;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import android.Manifest;
 import android.content.Intent;
@@ -338,7 +339,11 @@ public class ChartActivity extends AppCompatActivity {
     }
 
     private void shareIt() {
-        Uri uri = Uri.fromFile(imagePath);
+        Uri uri = FileProvider.getUriForFile(
+                ChartActivity.this,
+                "com.example.expensesspark.example.provider", //(use your app signature + ".provider" )
+                imagePath);
+        //Uri uri = Uri.fromFile(imagePath);
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("image/*");
         String shareBody = "My income & expenses screenshot";
