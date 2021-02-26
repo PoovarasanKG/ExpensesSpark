@@ -43,7 +43,7 @@
         app:layout_editor_absoluteX="0dp">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
@@ -90,7 +90,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_rowWeight="1"
             android:layout_columnWeight="1"
@@ -128,7 +128,8 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/mo_re"
                     android:gravity="center"
-                    android:text="Bank"
+                    android:maxLines="2"
+                    android:text="Saving Account"
                     android:textColor="@color/textcardColor"
                     android:textSize="14sp"
                     android:textStyle="bold" />

@@ -179,6 +179,7 @@ public class CommonDetailsActivity extends AppCompatActivity {
                 diaBox.show();
             }
         });
+
     }
 
     private AlertDialog AskOption()

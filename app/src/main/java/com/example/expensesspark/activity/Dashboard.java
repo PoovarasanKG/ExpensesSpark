@@ -2,8 +2,13 @@ package com.example.expensesspark.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.NotificationCompat;
 
 import android.accounts.Account;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -35,7 +40,7 @@ public class Dashboard extends AppCompatActivity {
 
     GridLayout menuGridLayout;
     Realm realm;
-    TextView incomeTv, greetTv;
+    TextView incomeTv, greetTv, cashTv, savingAccountTv, expenseTv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,9 @@ public class Dashboard extends AppCompatActivity {
         menuGridLayout = (GridLayout) findViewById(R.id.menuGridLayout);
         incomeTv = (TextView) findViewById(R.id.incomeTv);
         greetTv = (TextView) findViewById(R.id.welcomeHintTv);
+        cashTv = (TextView) findViewById(R.id.cashTv);
+        savingAccountTv = (TextView) findViewById(R.id.bankTv);
+        expenseTv = (TextView) findViewById(R.id.expenseTv);
 
         int child_count = menuGridLayout.getChildCount();
         for(int i =0;i<child_count;i++){
@@ -60,6 +68,7 @@ public class Dashboard extends AppCompatActivity {
         }
 
         showDashboardDetails();
+        sendNotification();
     }
 
     public void navigate(int position)
@@ -116,7 +125,41 @@ public class Dashboard extends AppCompatActivity {
                 .equalTo("transactionType", "Expense");
         double totalExpenseAmt = expenseTransactionTableResults.sum("amount").doubleValue();
 
-        incomeTv.setText("₹" + String.valueOf(totalExpenseAmt));
+        expenseTv.setText("₹" + String.valueOf(totalExpenseAmt));
 
+        RealmQuery<AccountTable> cashAccountTableResults = realm.where(AccountTable.class)
+                .equalTo("accountType", "Cash");
+        double totalCashAmt = cashAccountTableResults.sum("balance").doubleValue();
+
+        cashTv.setText("₹" + String.valueOf(totalCashAmt));
+
+        RealmQuery<AccountTable> bankAccountTableResults = realm.where(AccountTable.class)
+                .equalTo("accountType", "Saving Account");
+        double totalBankAmt = bankAccountTableResults.sum("balance").doubleValue();
+
+        savingAccountTv.setText("₹" + String.valueOf(totalBankAmt));
+    }
+
+    public void sendNotification()
+    {
+        Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder b = new NotificationCompat.Builder(getApplicationContext());
+
+        b.setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setWhen(System.currentTimeMillis())
+                .setSmallIcon(R.drawable.receivecash)
+                .setTicker("Hearty365")
+                .setContentTitle("Default notification")
+                .setContentText("Lorem ipsum dolor sit amet, consectetur adipiscing elit.")
+                .setDefaults(Notification.DEFAULT_LIGHTS| Notification.DEFAULT_SOUND)
+                .setContentIntent(contentIntent)
+                .setContentInfo("Info");
+
+
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(1, b.build());
     }
 }

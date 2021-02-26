@@ -61,7 +61,7 @@ public class AccountTableAdapter extends RecyclerView.Adapter<AccountTableAdapte
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.categoryLbl.getText(), Toast.LENGTH_SHORT).show();
+            //Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.categoryLbl.getText(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(view.getContext(), CommonDetailsActivity.class);
             intent.putExtra("PrimaryKey", primaryKey);
             intent.putExtra("ActivityName", "AccountListActivity");

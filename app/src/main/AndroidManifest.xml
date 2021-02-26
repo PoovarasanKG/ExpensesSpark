@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.expensesspark">
 
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".app.MyApplication"
         android:allowBackup="true"
@@ -60,6 +64,8 @@
             android:name=".activity.Dashboard"
             android:label="Dashboard"
             android:parentActivityName=".activity.SplashScreen" />
+
+        <receiver android:name=".app.NotificationHelper" />
     </application>
 
 </manifest>

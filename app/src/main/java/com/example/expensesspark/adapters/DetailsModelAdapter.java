@@ -50,7 +50,7 @@ public class DetailsModelAdapter extends RecyclerView.Adapter<DetailsModelAdapte
 
         @Override
         public void onClick(View view) {
-            Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.valueLbl.getText(), Toast.LENGTH_SHORT).show();
+           // Toast.makeText(view.getContext(), "position : " + getLayoutPosition() + " text : " + this.valueLbl.getText(), Toast.LENGTH_SHORT).show();
         }
     }
 }

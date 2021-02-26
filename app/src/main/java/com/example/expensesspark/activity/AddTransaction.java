@@ -77,7 +77,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
         primaryKey = getIntent().getLongExtra("transactionId", 0);
         activityType = getIntent().getStringExtra("ActivityType");
 
-        if (activity.equals("Edit"))
+        if ("Edit".equalsIgnoreCase(activity))
         {
             RealmQuery<TransactionTable> realmQuery = realm.where(TransactionTable.class)
                     .equalTo("transactionId", primaryKey);
@@ -116,7 +116,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
             public void onClick(View v) {
                 if (validationSuccess()) {
 
-                    if (activity.equals("Edit"))
+                    if (activity.equalsIgnoreCase("Edit"))
                     {
                         Toast.makeText(getApplicationContext(), "Transaction Updated Successfully", Toast.LENGTH_LONG).show();
                     }
