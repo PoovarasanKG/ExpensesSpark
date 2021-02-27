@@ -119,7 +119,6 @@ public class ReportActivity extends AppCompatActivity {
 
         //Income and Expenses by Category Report
         RealmResults<TransactionTable> incomeCategoryTransactionTableResults = realm.where(TransactionTable.class)
-                .equalTo("transactionType", "Income")
                 .greaterThanOrEqualTo("dateType", startDate)
                 .lessThan("dateType", endDate)
                 .findAll().sort("dateType", Sort.ASCENDING);

@@ -38,11 +38,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import io.realm.Sort;
+import io.realm.internal.util.Pair;
 
 
 public class ChartActivity extends AppCompatActivity {
@@ -97,35 +102,19 @@ public class ChartActivity extends AppCompatActivity {
         });
     }
 
-    private void getPermission()
-    {
-        if (ContextCompat.checkSelfPermission(ChartActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            //Permission was denied
-            //Request for permission
-            ActivityCompat.requestPermissions(ChartActivity.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    501);
-        }
-        else if (ContextCompat.checkSelfPermission(ChartActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
-                != PackageManager.PERMISSION_GRANTED) {
-            //Permission was denied
-            //Request for permission
-            ActivityCompat.requestPermissions(ChartActivity.this,
-                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    502);
-        }
-        else
-        {
-            Bitmap bitmap = takeScreenshot();
-            saveBitmap(bitmap);
-            shareIt();
-        }
-    }
-
+    // Load Chart Methods
     private void getAllEntries() {
-        TransactionTableHelper helper = new TransactionTableHelper(realm);
-        List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
+        Date startDate = getDateRange().first;
+        Date endDate = getDateRange().second;
+
+        //Income and Expenses by Flow Report
+        RealmResults<TransactionTable> transactionTableList = realm.where(TransactionTable.class)
+                .greaterThanOrEqualTo("dateType", startDate)
+                .lessThan("dateType", endDate)
+                .findAll().sort("dateType", Sort.ASCENDING);
+
+        //TransactionTableHelper helper = new TransactionTableHelper(realm);
+        //List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
 
         double income, expense, transfer;
         income = 0;
@@ -142,6 +131,7 @@ public class ChartActivity extends AppCompatActivity {
             }
         }
 
+        pieChart.invalidate();
         pieEntries = new ArrayList<>();
         pieEntries.add(new PieEntry((float) income, 0));
         pieEntries.add(new PieEntry((float) expense, 1));
@@ -158,8 +148,18 @@ public class ChartActivity extends AppCompatActivity {
     }
 
     private void getIncomeEntries() {
-        TransactionTableHelper helper = new TransactionTableHelper(realm);
-        List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
+        Date startDate = getDateRange().first;
+        Date endDate = getDateRange().second;
+
+        //Income and Expenses by Flow Report
+        RealmResults<TransactionTable> transactionTableList = realm.where(TransactionTable.class)
+                .equalTo("transactionType", "Income")
+                .greaterThanOrEqualTo("dateType", startDate)
+                .lessThan("dateType", endDate)
+                .findAll().sort("dateType", Sort.ASCENDING);
+
+        //TransactionTableHelper helper = new TransactionTableHelper(realm);
+        //List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
 
         double food, shopping, vehicle, transfer, Life, Housing, Communication, FinancialExpenses, Income, Investments, Others;
         food = 0;
@@ -175,34 +175,33 @@ public class ChartActivity extends AppCompatActivity {
         Others = 0;
 
         for (TransactionTable transactionTableListObj : transactionTableList) {
-            if (transactionTableListObj.getTransactionType().equals("Income"))
+            if (transactionTableListObj.getCategory().equals("Food And Drinks"))
             {
-                if (transactionTableListObj.getCategory().equals("Food And Drinks"))
-                {
-                    food = food + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Shopping")) {
-                    shopping = shopping + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Vehicle")) {
-                    vehicle = vehicle + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Transportation")) {
-                    transfer = transfer + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Life And Entertainment")) {
-                    Life = Life + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Housing")) {
-                    Housing = Housing + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Communication")) {
-                    Communication = Communication + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Financial Expenses")) {
-                    FinancialExpenses = FinancialExpenses + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Income")) {
-                    Income = Income + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Investments")) {
-                    Investments = Investments + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Others")) {
-                    Others = Others + transactionTableListObj.getAmount();
-                }
+                food = food + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Shopping")) {
+                shopping = shopping + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Vehicle")) {
+                vehicle = vehicle + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Transportation")) {
+                transfer = transfer + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Life And Entertainment")) {
+                Life = Life + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Housing")) {
+                Housing = Housing + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Communication")) {
+                Communication = Communication + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Financial Expenses")) {
+                FinancialExpenses = FinancialExpenses + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Income")) {
+                Income = Income + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Investments")) {
+                Investments = Investments + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Others")) {
+                Others = Others + transactionTableListObj.getAmount();
             }
         }
+
+        pieChart.invalidate();
 
         pieEntries = new ArrayList<>();
 
@@ -308,6 +307,33 @@ public class ChartActivity extends AppCompatActivity {
         pieDataSet.setSliceSpace(5f);
     }
 
+    // Share Screen Methods
+    private void getPermission()
+    {
+        if (ContextCompat.checkSelfPermission(ChartActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            //Permission was denied
+            //Request for permission
+            ActivityCompat.requestPermissions(ChartActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    501);
+        }
+        else if (ContextCompat.checkSelfPermission(ChartActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) {
+            //Permission was denied
+            //Request for permission
+            ActivityCompat.requestPermissions(ChartActivity.this,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                    502);
+        }
+        else
+        {
+            Bitmap bitmap = takeScreenshot();
+            saveBitmap(bitmap);
+            shareIt();
+        }
+    }
+
     public Bitmap takeScreenshot() {
         View rootView = findViewById(android.R.id.content).getRootView();
         rootView.setDrawingCacheEnabled(true);
@@ -352,6 +378,49 @@ public class ChartActivity extends AppCompatActivity {
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
         startActivity(Intent.createChooser(sharingIntent, "Share via"));
+    }
+
+    // Get Start and End Date Methods
+    public Pair<Date, Date> getDateRange() {
+        Date begining, end;
+
+        {
+            Calendar calendar = getCalendarForNow();
+            calendar.set(Calendar.DAY_OF_MONTH,
+                    calendar.getActualMinimum(Calendar.DAY_OF_MONTH));
+            setTimeToBeginningOfDay(calendar);
+            begining = calendar.getTime();
+        }
+
+        {
+            Calendar calendar = getCalendarForNow();
+            calendar.set(Calendar.DAY_OF_MONTH,
+                    calendar.getActualMaximum(Calendar.DAY_OF_MONTH));
+            setTimeToEndofDay(calendar);
+            end = calendar.getTime();
+        }
+
+        return Pair.create(begining, end);
+    }
+
+    private static Calendar getCalendarForNow() {
+        Calendar calendar = GregorianCalendar.getInstance();
+        calendar.setTime(new Date());
+        return calendar;
+    }
+
+    private static void setTimeToBeginningOfDay(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+    }
+
+    private static void setTimeToEndofDay(Calendar calendar) {
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
     }
 
 }
