@@ -19,6 +19,8 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.List;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
+import io.realm.Sort;
 
 public class TransactionsListActivity extends AppCompatActivity {
 
@@ -46,9 +48,12 @@ public class TransactionsListActivity extends AppCompatActivity {
 
         if (activityName.equals("Income")) {
             //RETRIEVE
-            TransactionTableHelper helper=new TransactionTableHelper(realm);
-            transactionTableList=helper.retrieveTransactionItemsByType("Income");
+            //TransactionTableHelper helper=new TransactionTableHelper(realm);
+            //transactionTableList=helper.retrieveTransactionItemsByType("Income");
 
+            transactionTableList = realm.where(TransactionTable.class)
+                    .equalTo("transactionType", "Income")
+                    .findAll().sort("dateType", Sort.DESCENDING);
             //BIND
             adapter=new TransactionTableAdapter(transactionTableList, activityName);
             recyclerView.setAdapter(adapter);
