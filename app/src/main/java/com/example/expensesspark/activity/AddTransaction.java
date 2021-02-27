@@ -31,9 +31,12 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -51,6 +54,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
     Realm realm;
     String activity, activityType = "";
     long primaryKey;
+    Date selectedDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +104,9 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
             selectDate.getEditText().setText(transactionTablelObj.getDate());
             selectTime.getEditText().setText(transactionTablelObj.getTime());
             descriptionTxt.getEditText().setText(transactionTablelObj.getDescription());
+
+
+            selectedDate = transactionTablelObj.getDateType();
         }
         else
         {
@@ -108,6 +115,9 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
 
             selectDate.getEditText().setText(currentDate);
             selectTime.getEditText().setText(currentTime);
+            //Calendar.getInstance().getTime()
+            Calendar calendar = GregorianCalendar.getInstance();
+            selectedDate = calendar.getTime();
         }
 
         saveBtn.setOnClickListener(new View.OnClickListener() {
@@ -180,6 +190,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                     transactionTableModelObj.setDescription(descriptionTxt.getEditText().getText().toString());
                     transactionTableModelObj.setPaymentMode(paymentModeSpinner.getSelectedItem().toString());
                     transactionTableModelObj.setLocation(locationTxt.getEditText().getText().toString());
+                    transactionTableModelObj.setDateType(selectedDate);
 
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
@@ -268,6 +279,20 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                                               int monthOfYear, int dayOfMonth) {
 
                             selectDate.getEditText().setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                            Calendar calendar = Calendar.getInstance();
+                            calendar.set(year, monthOfYear, dayOfMonth);
+                            selectedDate = calendar.getTime();
+
+                           /* DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+                            String formatedDate = sdf.format(calendar.getTime());
+                            try {
+                                selectedDate = sdf.parse(formatedDate);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                                selectedDate = new Date();
+                            }*/
+
 
                         }
                     }, mYear, mMonth, mDay);

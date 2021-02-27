@@ -1,5 +1,7 @@
 package com.example.expensesspark.model;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -12,6 +14,7 @@ public class TransactionTable extends RealmObject {
     String transactionAccount;
     String category;
     String date;
+    Date dateType;
     String time;
     String description;
     String paymentMode;
@@ -39,6 +42,14 @@ public class TransactionTable extends RealmObject {
 
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public Date getDateType() {
+        return dateType;
+    }
+
+    public void setDateType(Date dateType) {
+        this.dateType = dateType;
     }
 
     public String getTransactionAccount() {

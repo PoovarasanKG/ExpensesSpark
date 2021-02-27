@@ -92,7 +92,7 @@ public class Dashboard extends AppCompatActivity {
         }
         else if (position == 3)
        {
-         Intent i = new Intent(this, AddTransaction.class);
+         Intent i = new Intent(this, ReportActivity.class);
          startActivity(i);
        }
         else if (position == 4)

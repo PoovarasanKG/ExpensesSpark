@@ -28,19 +28,52 @@
 
                     <TextView
                         android:id="@+id/textView3"
+                        style="@style/TextAppearance.MyTheme.Headline6"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="Poovarasan K" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        style="@style/TextAppearance.AppCompat.Light.SearchResult.Subtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="Expenses Spark Monthly Report" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/flowReportTV"
                         style="@android:style/TextAppearance.Material.Subhead"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:text="Income & Expense Flow Report" />
+                        android:text="Income &amp; Expense Flow Report" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/flowReportMonthTV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
-                        android:text="For month of February, 2021" />
+                        android:text="For month of" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -53,9 +86,9 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/incomeTV"
                             style="@style/TextAppearance.Compat.Notification.Media"
-                            android:layout_width="120dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
@@ -64,7 +97,7 @@
                             android:textColor="@color/textcardColor" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/incomeValTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -73,7 +106,6 @@
                             android:layout_weight="1"
                             android:text="$100"
                             android:textColor="@color/darkTextColor" />
-
                     </LinearLayout>
 
                     <LinearLayout
@@ -85,9 +117,9 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/expenseTV"
                             style="@style/TextAppearance.Compat.Notification.Media"
-                            android:layout_width="120dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
@@ -96,7 +128,7 @@
                             android:textColor="@color/textcardColor" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/expenseValTv"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -118,9 +150,9 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/creditTV"
                             style="@style/TextAppearance.Compat.Notification.Media"
-                            android:layout_width="120dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
@@ -129,7 +161,7 @@
                             android:textColor="@color/textcardColor" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/creditValTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -150,9 +182,9 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/cashTV"
                             style="@style/TextAppearance.Compat.Notification.Media"
-                            android:layout_width="120dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
@@ -161,7 +193,7 @@
                             android:textColor="@color/textcardColor" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/cashValTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -184,9 +216,9 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/bankTV"
                             style="@style/TextAppearance.Compat.Notification.Media"
-                            android:layout_width="120dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
@@ -195,7 +227,7 @@
                             android:textColor="@color/textcardColor" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/bankValTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -222,15 +254,15 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/categoryReportTV"
                         style="@android:style/TextAppearance.Material.Subhead"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
-                        android:text="Income & Expense by Categories Report" />
+                        android:text="Income &amp; Expense by Categories Report" />
 
                     <TextView
-                        android:id="@+id/textView6"
+                        android:id="@+id/categoryFlowMonthReportTV"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
@@ -248,18 +280,18 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/foodTV"
                             style="@style/TextAppearance.Compat.Notification.Media"
-                            android:layout_width="120dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
-                            android:text="Food"
+                            android:text="Food And Drinks"
                             android:textColor="@color/textcardColor" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/foodIncomeTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -270,7 +302,7 @@
                             android:textColor="@color/green_500" />
 
                         <TextView
-                            android:id="@+id/textView14"
+                            android:id="@+id/foodExpenseTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -292,18 +324,18 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/shoppingTv"
                             style="@style/TextAppearance.Compat.Notification.Media"
-                            android:layout_width="120dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
-                            android:text="Expense"
+                            android:text="Shopping"
                             android:textColor="@color/textcardColor" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/shoppingIncomeTv"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -313,6 +345,17 @@
                             android:text="$100"
                             android:textAppearance="@style/TextAppearance.MyTheme.Body2"
                             android:textColor="@color/darkTextColor" />
+                        <TextView
+                            android:id="@+id/shoppingExpenseTv"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="-$ 100"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
 
                     </LinearLayout>
 
@@ -326,18 +369,18 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/transporationTV"
                             style="@style/TextAppearance.Compat.Notification.Media"
-                            android:layout_width="120dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
-                            android:text="Credit"
+                            android:text="Transporation"
                             android:textColor="@color/textcardColor" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/transporationIncomeTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -346,6 +389,17 @@
                             android:layout_weight="1"
                             android:text="$100"
                             android:textColor="@color/darkTextColor" />
+                        <TextView
+                            android:id="@+id/transporationExpenseTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="-$ 100"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
 
                     </LinearLayout>
 
@@ -358,18 +412,18 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/vehicleTV"
                             style="@style/TextAppearance.Compat.Notification.Media"
-                            android:layout_width="120dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
-                            android:text="Cash"
+                            android:text="Vehicle"
                             android:textColor="@color/textcardColor" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/vehicleIncomeTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -378,6 +432,276 @@
                             android:layout_weight="1"
                             android:text="$100"
                             android:textColor="@color/darkTextColor" />
+                        <TextView
+                            android:id="@+id/vehicleExpenseTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="-$ 100"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginBottom="0dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/lifeAndEntertainmentTV"
+                            style="@style/TextAppearance.Compat.Notification.Media"
+                            android:layout_width="135dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="Life &amp; Entertainment"
+                            android:textColor="@color/textcardColor" />
+
+                        <TextView
+                            android:id="@+id/lifeAndEntertainmentIncomeTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="$100"
+                            android:textColor="@color/darkTextColor" />
+
+                        <TextView
+                            android:id="@+id/lifeAndEntertainmentExpenseTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="-$ 100"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/housingTv"
+                            style="@style/TextAppearance.Compat.Notification.Media"
+                            android:layout_width="135dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="Housing"
+                            android:textColor="@color/textcardColor" />
+
+                        <TextView
+                            android:id="@+id/housingIncomeTv"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="$100"
+                            android:textColor="@color/darkTextColor" />
+                        <TextView
+                            android:id="@+id/housingExpenseTv"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="-$ 100"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/communicationTV"
+                            style="@style/TextAppearance.Compat.Notification.Media"
+                            android:layout_width="135dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="Communication"
+                            android:textColor="@color/textcardColor" />
+
+                        <TextView
+                            android:id="@+id/communicationIncomeTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="$100"
+                            android:textColor="@color/darkTextColor" />
+
+                        <TextView
+                            android:id="@+id/communicationExpenseTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="-$ 100"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/financialExpensesTV"
+                            style="@style/TextAppearance.Compat.Notification.Media"
+                            android:layout_width="135dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="Financial Expenses"
+                            android:textColor="@color/textcardColor" />
+
+                        <TextView
+                            android:id="@+id/financialExpensesIncomeTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="$100"
+                            android:textColor="@color/darkTextColor" />
+                        <TextView
+                            android:id="@+id/financialExpensesExpenseTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="-$ 100"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/investmentsTV"
+                            style="@style/TextAppearance.Compat.Notification.Media"
+                            android:layout_width="135dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="Invenstments"
+                            android:textColor="@color/textcardColor" />
+
+                        <TextView
+                            android:id="@+id/investmentsIncomeTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="$100"
+                            android:textColor="@color/darkTextColor" />
+
+                        <TextView
+                            android:id="@+id/investmentsExpenseTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="-$ 100"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/categoryIncomeTV"
+                            style="@style/TextAppearance.Compat.Notification.Media"
+                            android:layout_width="135dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="Income "
+                            android:textColor="@color/textcardColor" />
+
+                        <TextView
+                            android:id="@+id/categoryIncomeIncomeTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="$100"
+                            android:textColor="@color/darkTextColor" />
+                        <TextView
+                            android:id="@+id/categoryIncomeExpenseTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="-$ 100"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
 
                     </LinearLayout>
 
@@ -392,18 +716,18 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView9"
+                            android:id="@+id/othersTV"
                             style="@style/TextAppearance.Compat.Notification.Media"
-                            android:layout_width="120dp"
+                            android:layout_width="135dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="15dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
-                            android:text="Bank"
+                            android:text="Others"
                             android:textColor="@color/textcardColor" />
 
                         <TextView
-                            android:id="@+id/textView10"
+                            android:id="@+id/othersIncomeTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -413,7 +737,19 @@
                             android:text="$100"
                             android:textColor="@color/darkTextColor" />
 
+                        <TextView
+                            android:id="@+id/othersExpenseTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="-$ 100"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
                     </LinearLayout>
+
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
