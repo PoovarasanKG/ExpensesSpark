@@ -52,7 +52,7 @@
             android:parentActivityName=".activity.Dashboard" />
         <activity
             android:name=".activity.NewAccountActivity"
-            android:label="@string/app_name2"
+            android:label="New Account"
             android:parentActivityName=".activity.Dashboard" />
         <activity
             android:name=".activity.TransactionsListActivity"

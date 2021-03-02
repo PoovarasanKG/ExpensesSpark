@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -23,6 +24,7 @@ import com.example.expensesspark.model.DetailsModel;
 import com.example.expensesspark.model.TransactionTable;
 import com.example.expensesspark.realm.TransactionTableHelper;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -274,36 +276,126 @@ public class ChartActivity extends AppCompatActivity {
     }
 
     private void getExpensesEntries() {
-        TransactionTableHelper helper = new TransactionTableHelper(realm);
-        List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
+        Date startDate = getDateRange().first;
+        Date endDate = getDateRange().second;
 
-        double income, expense, transfer;
-        income = 0;
-        expense = 0;
+        //Income and Expenses by Flow Report
+        RealmResults<TransactionTable> transactionTableList = realm.where(TransactionTable.class)
+                .equalTo("transactionType", "Expense")
+                .greaterThanOrEqualTo("dateType", startDate)
+                .lessThan("dateType", endDate)
+                .findAll().sort("dateType", Sort.ASCENDING);
+        //TransactionTableHelper helper = new TransactionTableHelper(realm);
+       // List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
+
+        double food, shopping, vehicle, transfer, Life, Housing, Communication, FinancialExpenses, Income, Investments, Others;
+        food = 0;
+        shopping = 0;
+        vehicle = 0;
         transfer = 0;
+        Life = 0;
+        Housing = 0;
+        Communication = 0;
+        FinancialExpenses = 0;
+        Income = 0;
+        Investments = 0;
+        Others = 0;
 
         for (TransactionTable transactionTableListObj : transactionTableList) {
-            if (transactionTableListObj.getTransactionType().equals("Income")) {
-                income = income + transactionTableListObj.getAmount();
-            } else if (transactionTableListObj.getTransactionType().equals("Expense")) {
-                expense = expense + transactionTableListObj.getAmount();
-            } else if (transactionTableListObj.getTransactionType().equals("Transfer")) {
+            if (transactionTableListObj.getCategory().equals("Food And Drinks"))
+            {
+                food = food + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Shopping")) {
+                shopping = shopping + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Vehicle")) {
+                vehicle = vehicle + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Transportation")) {
                 transfer = transfer + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Life And Entertainment")) {
+                Life = Life + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Housing")) {
+                Housing = Housing + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Communication")) {
+                Communication = Communication + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Financial Expenses")) {
+                FinancialExpenses = FinancialExpenses + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Income")) {
+                Income = Income + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Investments")) {
+                Investments = Investments + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Others")) {
+                Others = Others + transactionTableListObj.getAmount();
             }
         }
 
+        pieChart.invalidate();
         pieEntries = new ArrayList<>();
-        pieEntries.add(new PieEntry((float) income, 0));
-        pieEntries.add(new PieEntry((float) expense, 1));
-       // pieEntries.add(new PieEntry((float) transfer, 2));
+        int dataInsertPosition = 0;
 
-        pieDataSet = new PieDataSet(pieEntries, "Income, Expense");
+        if (food != 0)
+        {
+            pieEntries.add(new PieEntry((float) food, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+
+        if (shopping != 0)
+        {
+            pieEntries.add(new PieEntry((float) shopping, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (vehicle != 0)
+        {
+            pieEntries.add(new PieEntry((float) vehicle, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (transfer != 0)
+        {
+            pieEntries.add(new PieEntry((float) transfer, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (Life != 0)
+        {
+            pieEntries.add(new PieEntry((float) Life, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (Housing != 0)
+        {
+            pieEntries.add(new PieEntry((float) Housing, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (Communication != 0)
+        {
+            pieEntries.add(new PieEntry((float) Communication, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (FinancialExpenses != 0)
+        {
+            pieEntries.add(new PieEntry((float) FinancialExpenses, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (Income != 0)
+        {
+            pieEntries.add(new PieEntry((float) Income, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (Investments != 0)
+        {
+            pieEntries.add(new PieEntry((float) Investments, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (Others != 0)
+        {
+            pieEntries.add(new PieEntry((float) Others, dataInsertPosition));
+        }
+
+
+        pieDataSet = new PieDataSet(pieEntries, "Food And Drinks, Shopping, Vehicle, transfer, Life, Housing, Communication, FinancialExpenses, Income, Investments, Others");
         pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         pieDataSet.setSliceSpace(2f);
         pieDataSet.setValueTextColor(R.color.white);
-        pieDataSet.setValueTextSize(10f);
+        pieDataSet.setValueTextSize(16f);
         pieDataSet.setSliceSpace(5f);
     }
 

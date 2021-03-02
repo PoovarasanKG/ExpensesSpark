@@ -20,6 +20,18 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
 
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/shareBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="60dp"
+                    android:layout_marginStart="330dp"
+                    android:layout_marginLeft="00dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="0dp"
+                    android:layout_marginBottom="15dp"
+                    android:clickable="true"
+                    app:srcCompat="?attr/actionModeShareDrawable" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -27,7 +39,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/repoterName"
                         style="@style/TextAppearance.MyTheme.Headline6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -55,7 +67,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:orientation="vertical">
 
@@ -267,7 +279,52 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="8dp"
                         android:layout_marginTop="0dp"
-                        android:text="For month of February, 2021" />
+                        android:text="For month of " />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/catgoryListTv"
+                            style="@style/TextAppearance.Compat.Notification.Media"
+                            android:layout_width="135dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="Catgory List"
+                            android:textColor="@color/textcardColor" />
+
+                        <TextView
+                            android:id="@+id/incomeListTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Income List"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/green_500" />
+                        <TextView
+                            android:id="@+id/expenseListTV"
+                            style="@style/TextAppearance.MyTheme.Subtitle1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Expenses List"
+                            android:textAppearance="@style/TextAppearance.MyTheme.Body2"
+                            android:textColor="@color/red_600" />
+
+                    </LinearLayout>
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -344,7 +401,7 @@
                             android:layout_weight="1"
                             android:text="$100"
                             android:textAppearance="@style/TextAppearance.MyTheme.Body2"
-                            android:textColor="@color/darkTextColor" />
+                            android:textColor="@color/green_500" />
                         <TextView
                             android:id="@+id/shoppingExpenseTv"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
@@ -388,7 +445,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:text="$100"
-                            android:textColor="@color/darkTextColor" />
+                            android:textColor="@color/green_500" />
                         <TextView
                             android:id="@+id/transporationExpenseTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
@@ -431,7 +488,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:text="$100"
-                            android:textColor="@color/darkTextColor" />
+                            android:textColor="@color/green_500" />
                         <TextView
                             android:id="@+id/vehicleExpenseTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
@@ -476,7 +533,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:text="$100"
-                            android:textColor="@color/darkTextColor" />
+                            android:textColor="@color/green_500" />
 
                         <TextView
                             android:id="@+id/lifeAndEntertainmentExpenseTV"
@@ -518,7 +575,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:text="$100"
-                            android:textColor="@color/darkTextColor" />
+                            android:textColor="@color/green_500" />
                         <TextView
                             android:id="@+id/housingExpenseTv"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
@@ -562,7 +619,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:text="$100"
-                            android:textColor="@color/darkTextColor" />
+                            android:textColor="@color/green_500" />
 
                         <TextView
                             android:id="@+id/communicationExpenseTV"
@@ -604,7 +661,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:text="$100"
-                            android:textColor="@color/darkTextColor" />
+                            android:textColor="@color/green_500" />
                         <TextView
                             android:id="@+id/financialExpensesExpenseTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
@@ -648,7 +705,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:text="$100"
-                            android:textColor="@color/darkTextColor" />
+                            android:textColor="@color/green_500" />
 
                         <TextView
                             android:id="@+id/investmentsExpenseTV"
@@ -690,7 +747,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:text="$100"
-                            android:textColor="@color/darkTextColor" />
+                            android:textColor="@color/green_500" />
                         <TextView
                             android:id="@+id/categoryIncomeExpenseTV"
                             style="@style/TextAppearance.MyTheme.Subtitle1"
@@ -735,7 +792,7 @@
                             android:layout_marginBottom="5dp"
                             android:layout_weight="1"
                             android:text="$100"
-                            android:textColor="@color/darkTextColor" />
+                            android:textColor="@color/green_500" />
 
                         <TextView
                             android:id="@+id/othersExpenseTV"

@@ -46,9 +46,8 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
 
         realm = Realm.getDefaultInstance();
 
-        getSupportActionBar().setTitle("NewAccountActivity");
+        getSupportActionBar().setTitle("New Account");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         submitButton = findViewById(R.id.submitButton);
         accountName = findViewById(R.id.accountname);

@@ -178,6 +178,17 @@ public class CommonDetailsActivity extends AppCompatActivity {
             }
         });
 
+        edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), NewAccountActivity.class);
+                i.putExtra("Activity", "Edit");
+                i.putExtra("accountId", primaryKey);
+                i.putExtra("ActivityType", activityName);
+                startActivity(i);
+            }
+        });
+
         delete_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,6 +211,12 @@ public class CommonDetailsActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //your deleting code
                         if (activityName.equals("AccountListActivity")) {
+                            realm.beginTransaction();
+                            RealmResults<AccountTable> result = realm.where(AccountTable.class).equalTo("accountId",primaryKey).findAll();
+                            result.deleteAllFromRealm();
+                            realm.commitTransaction();
+                            dialog.dismiss();
+                            navigateActivity();
 
                         }
                         else  if (activityName.equals("TransactionListActivity")) {
@@ -234,7 +251,8 @@ public class CommonDetailsActivity extends AppCompatActivity {
         }
         else if (activityType.equalsIgnoreCase("Accounts"))
         {
-            Intent accountListActivity = new Intent(this, AccountListActivity.class);
+            Intent accountListActivity = new Intent(getApplicationContext(), AccountListActivity.class);
+            accountListActivity.putExtra("ActivityName", activityType);
             startActivity(accountListActivity);
         }
         else
