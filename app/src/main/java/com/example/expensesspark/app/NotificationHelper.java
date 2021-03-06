@@ -14,7 +14,8 @@ import com.example.expensesspark.R;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-import static com.example.expensesspark.activity.AccountSetings.NOTIFICATION_CHANNEL_ID;
+// notifi in acc settings accsetings to dash
+import static com.example.expensesspark.activity.Dashboard.NOTIFICATION_CHANNEL_ID;
 
 public class NotificationHelper extends BroadcastReceiver {
     public static String NOTIFICATION_ID = "notification-id" ;

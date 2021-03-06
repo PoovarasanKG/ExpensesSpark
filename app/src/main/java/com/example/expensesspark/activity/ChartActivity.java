@@ -106,6 +106,7 @@ public class ChartActivity extends AppCompatActivity {
 
     // Load Chart Methods
     private void getAllEntries() {
+
         Date startDate = getDateRange().first;
         Date endDate = getDateRange().second;
 
@@ -268,11 +269,13 @@ public class ChartActivity extends AppCompatActivity {
         pieDataSet = new PieDataSet(pieEntries, "Food And Drinks, Shopping, Vehicle, transfer, Life, Housing, Communication, FinancialExpenses, Income, Investments, Others");
         pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
+        pieChart.invalidate();
         pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
         pieDataSet.setSliceSpace(2f);
         pieDataSet.setValueTextColor(R.color.white);
         pieDataSet.setValueTextSize(10f);
         pieDataSet.setSliceSpace(5f);
+
     }
 
     private void getExpensesEntries() {

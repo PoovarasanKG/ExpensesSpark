@@ -87,6 +87,7 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
                     .equalTo("transactionId", primaryKey);
             TransactionTable transactionTablelObj = realmQuery.findAll().first();
 
+            //transation spinner
             if (transactionTablelObj.getTransactionType().equalsIgnoreCase("Income"))
             {
                 transactionTypeSpinner.setSelection(1);
@@ -104,10 +105,80 @@ public class AddTransaction extends AppCompatActivity implements View.OnClickLis
             selectDate.getEditText().setText(transactionTablelObj.getDate());
             selectTime.getEditText().setText(transactionTablelObj.getTime());
             descriptionTxt.getEditText().setText(transactionTablelObj.getDescription());
+            locationTxt.getEditText().setText(transactionTablelObj.getLocation());
 
+            //account spinner
+            if(transactionTablelObj.getTransactionAccount().equalsIgnoreCase("Cash"))
+            {
+                accountSpinner.setSelection(1);
+            }
+            else if(transactionTablelObj.getTransactionAccount().equalsIgnoreCase("Bank"))
+            {
+                accountSpinner.setSelection(2);
+
+            }
+            else if(transactionTablelObj.getTransactionAccount().equalsIgnoreCase("Credit"))
+            {
+                accountSpinner.setSelection(3);
+            }
+
+            //category spinner
+            if(transactionTablelObj.getCategory().equalsIgnoreCase("Food And Drinks"))
+            {
+                categorySpinner.setSelection(1);
+            }else if(transactionTablelObj.getCategory().equalsIgnoreCase("Shopping"))
+            {
+                categorySpinner.setSelection(2);
+            }else if(transactionTablelObj.getCategory().equalsIgnoreCase("Transportaion"))
+            {
+                categorySpinner.setSelection(3);
+            }else if(transactionTablelObj.getCategory().equalsIgnoreCase("Vehicle"))
+            {
+                categorySpinner.setSelection(4);
+            }else if(transactionTablelObj.getCategory().equalsIgnoreCase("Life And Entertainment"))
+            {
+                categorySpinner.setSelection(5);
+            }else if(transactionTablelObj.getCategory().equalsIgnoreCase("Housing"))
+            {
+                categorySpinner.setSelection(6);
+            }else if(transactionTablelObj.getCategory().equalsIgnoreCase("Communication"))
+            {
+                categorySpinner.setSelection(7);
+            }else if(transactionTablelObj.getCategory().equalsIgnoreCase("Financial Exxpenses"))
+            {
+                categorySpinner.setSelection(8);
+            }else if(transactionTablelObj.getCategory().equalsIgnoreCase("Investments"))
+            {
+                categorySpinner.setSelection(9);
+            }else if(transactionTablelObj.getCategory().equalsIgnoreCase("Income"))
+            {
+                categorySpinner.setSelection(10);
+            }else if(transactionTablelObj.getCategory().equalsIgnoreCase("Others"))
+            {
+                categorySpinner.setSelection(11);
+            }
+            //paymode spinner
+            if(transactionTablelObj.getPaymentMode().equalsIgnoreCase("Cash"))
+            {
+               paymentModeSpinner.setSelection(1);
+            }else if(transactionTablelObj.getPaymentMode().equalsIgnoreCase("Debit Card"))
+            {
+                paymentModeSpinner.setSelection(2);
+            }else if(transactionTablelObj.getPaymentMode().equalsIgnoreCase("Credit Card"))
+            {
+                paymentModeSpinner.setSelection(3);
+            }
+            else if(transactionTablelObj.getPaymentMode().equalsIgnoreCase("UPI"))
+            {
+                paymentModeSpinner.setSelection(4);
+            }else if(transactionTablelObj.getPaymentMode().equalsIgnoreCase("Internet Banking"))
+            {
+                paymentModeSpinner.setSelection(5);
+            }
 
             selectedDate = transactionTablelObj.getDateType();
         }
+
         else
         {
             String currentDate = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(new Date());

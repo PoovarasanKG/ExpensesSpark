@@ -194,13 +194,13 @@ public class ReportActivity extends AppCompatActivity {
                     expenseVehicle = expenseVehicle + transactionTableListObj.getAmount();
                 } else if (transactionTableListObj.getCategory().equals("Transportation")) {
                     expenseTransportation = expenseTransportation + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Life_And_Entertainment")) {
+                } else if (transactionTableListObj.getCategory().equals("Life And Entertainment")) {
                     expenseLife_And_Entertainment = expenseLife_And_Entertainment + transactionTableListObj.getAmount();
                 } else if (transactionTableListObj.getCategory().equals("Housing")) {
                     expenseHousing = expenseHousing + transactionTableListObj.getAmount();
                 } else if (transactionTableListObj.getCategory().equals("Communication")) {
                     expenseCommunication = expenseCommunication + transactionTableListObj.getAmount();
-                } else if (transactionTableListObj.getCategory().equals("Financial_Expenses")) {
+                } else if (transactionTableListObj.getCategory().equals("Financial Expenses")) {
                     expenseFinancial_Expenses = expenseFinancial_Expenses + transactionTableListObj.getAmount();
                 } else if (transactionTableListObj.getCategory().equals("Income")) {
                     expenseIncome = expenseIncome + transactionTableListObj.getAmount();
@@ -354,7 +354,7 @@ public class ReportActivity extends AppCompatActivity {
         //Uri uri = Uri.fromFile(imagePath);
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("image/*");
-        String shareBody = "My income & expenses screenshot";
+        String shareBody = "My Daily income & expenses Report screenshot";
         sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Expenses Spark");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         sharingIntent.putExtra(Intent.EXTRA_STREAM, uri);

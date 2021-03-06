@@ -1,5 +1,7 @@
 package com.example.expensesspark.model;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -12,7 +14,9 @@ public class AccountTable extends RealmObject {
     String accountType;
     String currencyType;
     double balance;
-    String dateTime;
+    private String dateTime;
+   // Date dateType;
+
 
 
     public String getDateTime() {
@@ -31,6 +35,14 @@ public class AccountTable extends RealmObject {
         this.balance = balance;
     }
 
+    public String getaccountNumber() {
+        return accountNumber;
+    }
+
+    public void setaccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
 
     public String getAccountName() {
         return accountName;
@@ -40,13 +52,6 @@ public class AccountTable extends RealmObject {
         this.accountName = accountName;
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
-    }
-
-    public void setAccountNumber(String accountNumber) {
-        this.accountNumber = accountNumber;
-    }
 
     public String getAccountType() {
         return accountType;
@@ -71,6 +76,11 @@ public class AccountTable extends RealmObject {
     public void setaccountId(long accountId) {
         this.accountId = accountId;
     }
+   // public Date getDateType() {
+    //    return dateType;
+  //  }
 
-
+    //public void setDateType(Date dateType) {
+   //     this.dateType = dateType;
+ //   }
 }

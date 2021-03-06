@@ -82,7 +82,7 @@ public class CommonDetailsActivity extends AppCompatActivity {
 
             List<DetailsModel> detailsModelList = new ArrayList<>();
             DetailsModel accountNameObj = new DetailsModel("Account Name", accountTableObj.getAccountName());
-            DetailsModel accountNumberObj = new DetailsModel("Account Number", accountTableObj.getAccountNumber());
+            DetailsModel accountNumberObj = new DetailsModel("Account Number", accountTableObj.getaccountNumber());
             DetailsModel accountBalanceObj = new DetailsModel("Account Balance", String.valueOf(accountTableObj.getBalance()));
             DetailsModel accountTypeObj = new DetailsModel("Account Type", accountTableObj.getAccountType());
             DetailsModel accountCurrencyObj = new DetailsModel("Currency Type", accountTableObj.getCurrencyType());
@@ -97,7 +97,7 @@ public class CommonDetailsActivity extends AppCompatActivity {
             //BIND
             DetailsModelAdapter adapter = new DetailsModelAdapter(detailsModelList);
             recyclerView.setAdapter(adapter);
-
+            
 
         } else if (activityName.equals("TransactionListActivity")) {
             listType = "transaction";
@@ -175,17 +175,7 @@ public class CommonDetailsActivity extends AppCompatActivity {
                 i.putExtra("transactionId", primaryKey);
                 i.putExtra("ActivityType", activityName);
                 startActivity(i);
-            }
-        });
 
-        edit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), NewAccountActivity.class);
-                i.putExtra("Activity", "Edit");
-                i.putExtra("accountId", primaryKey);
-                i.putExtra("ActivityType", activityName);
-                startActivity(i);
             }
         });
 
@@ -249,7 +239,7 @@ public class CommonDetailsActivity extends AppCompatActivity {
             transactionsListActivity.putExtra("ActivityName", activityType);
             startActivity(transactionsListActivity);
         }
-        else if (activityType.equalsIgnoreCase("Accounts"))
+        else if (activityType.equalsIgnoreCase("Account"))
         {
             Intent accountListActivity = new Intent(getApplicationContext(), AccountListActivity.class);
             accountListActivity.putExtra("ActivityName", activityType);

@@ -38,38 +38,38 @@ public class TransactionsListActivity extends AppCompatActivity {
         fabButton = (FloatingActionButton) findViewById(R.id.fabButton);
 
         //SETUP RECYCLERVIEW
-        recyclerView= (RecyclerView) findViewById(R.id.transactionsRecyclerView);
+        recyclerView = (RecyclerView) findViewById(R.id.transactionsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //SETUP REEALM
         realm = Realm.getDefaultInstance();
-
         String activityName = getIntent().getStringExtra("ActivityName");
 
         if (activityName.equals("Income")) {
             //RETRIEVE
-            //TransactionTableHelper helper=new TransactionTableHelper(realm);
-            //transactionTableList=helper.retrieveTransactionItemsByType("Income");
+            // TransactionTableHelper helper=new TransactionTableHelper(realm);
+            // transactionTableList=helper.retrieveTransactionItemsByType("Income");
 
             transactionTableList = realm.where(TransactionTable.class)
                     .equalTo("transactionType", "Income")
                     .findAll().sort("dateType", Sort.DESCENDING);
             //BIND
-            adapter=new TransactionTableAdapter(transactionTableList, activityName);
+            adapter = new TransactionTableAdapter(transactionTableList, activityName);
             recyclerView.setAdapter(adapter);
-        }
-        else if (activityName.equals("Expense")) {
+        } else if (activityName.equals("Expense")) {
             //RETRIEVE
-            TransactionTableHelper helper=new TransactionTableHelper(realm);
-            transactionTableList=helper.retrieveTransactionItemsByType("Expense");
+            // TransactionTableHelper helper=new TransactionTableHelper(realm);
+            // transactionTableList=helper.retrieveTransactionItemsByType("Expense");
+
+            transactionTableList = realm.where(TransactionTable.class)
+                    .equalTo("transactionType", "Expense")
+                    .findAll().sort("dateType", Sort.DESCENDING);
 
             //BIND
-            adapter=new TransactionTableAdapter(transactionTableList, activityName);
+            adapter = new TransactionTableAdapter(transactionTableList, activityName);
             recyclerView.setAdapter(adapter);
-        }
-        else
-        {
-           Toast.makeText(getApplicationContext(),"Please config for List", Toast.LENGTH_SHORT);
+        } else {
+            Toast.makeText(getApplicationContext(), "Please config for List", Toast.LENGTH_SHORT);
         }
 
         fabButton.setOnClickListener(new View.OnClickListener() {
@@ -82,9 +82,4 @@ public class TransactionsListActivity extends AppCompatActivity {
             }
         });
     }
-    public void onBackPressed() {
-        super.onBackPressed();
-        this.finish();
-    }
-
 }

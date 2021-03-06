@@ -23,7 +23,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,6 +40,11 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
     Spinner currency_spinner;
     Spinner accountTypeSpinner;
     Realm realm;
+    long primarykey;
+    String activity, activityType = "";
+  //  Date selectedDate;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,34 +63,80 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
         accountTypeSpinner = findViewById(R.id.AccountTypeSpinner);
         currntBalance = findViewById(R.id.currntBalance);
 
+         activity = getIntent().getStringExtra("Activity");
+         primarykey = getIntent().getLongExtra("accountId",0);
+         activityType = getIntent().getStringExtra("ActivityType");
+
+         if ("Edit".equalsIgnoreCase(activity))
+         {
+             RealmQuery<AccountTable> realmQuery = realm.where(AccountTable.class)
+                     .equalTo("accountId", primarykey);
+             AccountTable accountTableObj = realmQuery.findAll().first();
+
+             accountName.getEditText().setText(accountTableObj.getAccountName());
+             bankAccountNumber.getEditText().setText(accountTableObj.getaccountNumber());
+             currntBalance.getEditText().setText(String.valueOf(accountTableObj.getBalance()));
+
+             //account spinner
+             if (accountTableObj.getAccountType().equalsIgnoreCase("Cash"))
+             {
+                 accountTypeSpinner.setSelection(1);
+             }
+             else if (accountTableObj.getAccountType().equalsIgnoreCase("Bank"))
+             {
+                 accountTypeSpinner.setSelection(2);
+             }else if (accountTableObj.getAccountType().equalsIgnoreCase("Credit"))
+             {
+                 accountTypeSpinner.setSelection(3);
+             }
+
+             // currency spinner
+             if (accountTableObj.getCurrencyType().equalsIgnoreCase("INR(₹)"))
+             {
+                 currency_spinner.setSelection(1);
+             }
+           //  selectedDate = accountTableObj.getDateType();
+
+         }
+
 
         submitButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
                 if (validationSuccess()) {
-                    Toast.makeText(getApplicationContext(), "New Account Added", Toast.LENGTH_LONG).show();
 
-                    String currentDate = new SimpleDateFormat("dd-MM-yyyy hh:mm a", Locale.getDefault()).format(new Date());
+                    if (activity.equalsIgnoreCase("Edit"))
+                    {
+                        Toast.makeText(getApplicationContext(),"Account Details Updated Succesfully", Toast.LENGTH_LONG).show();
+                    }
+
 
                     final AccountTable AccountTableModelObj = new AccountTable();
 
-                    Number current_id = realm.where(AccountTable.class).max("accountId");
                     long nextId;
 
-                    if (current_id == null) {
-                        nextId = 1;
-                    } else {
-                        nextId = current_id.intValue() + 1;
+                    if (activity.equalsIgnoreCase("Edit"))
+                    {
+                        nextId = primarykey;
+                    }
+                    else {
+                        Number current_id = realm.where(AccountTable.class).max("accountId");
+                        if (current_id == null) {
+                            nextId = 1;
+                        } else {
+                            nextId = current_id.intValue() + 1;
+
+                        }
                     }
 
                     AccountTableModelObj.setaccountId(nextId);
                     AccountTableModelObj.setAccountType(accountTypeSpinner.getSelectedItem().toString());
                     AccountTableModelObj.setCurrencyType(currency_spinner.getSelectedItem().toString());
                     AccountTableModelObj.setAccountName(accountName.getEditText().getText().toString());
-                    AccountTableModelObj.setAccountNumber(bankAccountNumber.getEditText().getText().toString());
+                    AccountTableModelObj.setaccountNumber(bankAccountNumber.getEditText().getText().toString());
                     AccountTableModelObj.setBalance(Double.parseDouble(currntBalance.getEditText().getText().toString()));
-                    AccountTableModelObj.setDateTime(currentDate);
+                //    AccountTableModelObj.setDateType(selectedDate);
 
 
                     realm.executeTransaction(new Realm.Transaction() {
@@ -156,6 +209,11 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
 
     private void showTransactionsListActivity() {
         Intent accountListActivity = new Intent(this, AccountListActivity.class);
+        accountListActivity.putExtra("ActivityName","Accounts");
         startActivity(accountListActivity);
+    }
+    public void onBackPressed() {
+        super.onBackPressed();
+        this.finish();
     }
 }
