@@ -41,9 +41,8 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
     Spinner accountTypeSpinner;
     Realm realm;
     long primarykey;
-    String activity, activityType = "";
-  //  Date selectedDate;
-
+    String activity;
+    //  Date selectedDate;
 
 
     @Override
@@ -63,41 +62,40 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
         accountTypeSpinner = findViewById(R.id.AccountTypeSpinner);
         currntBalance = findViewById(R.id.currntBalance);
 
-         activity = getIntent().getStringExtra("Activity");
-         primarykey = getIntent().getLongExtra("accountId",0);
-         activityType = getIntent().getStringExtra("ActivityType");
+        activity = getIntent().getStringExtra("Activity");
+        primarykey = getIntent().getLongExtra("accountId", 0);
 
-         if ("Edit".equalsIgnoreCase(activity))
-         {
-             RealmQuery<AccountTable> realmQuery = realm.where(AccountTable.class)
-                     .equalTo("accountId", primarykey);
-             AccountTable accountTableObj = realmQuery.findAll().first();
+        if ("Edit".equalsIgnoreCase(activity)) {
+            currntBalance.getEditText().setEnabled(false);
+            accountTypeSpinner.setEnabled(false);
 
-             accountName.getEditText().setText(accountTableObj.getAccountName());
-             bankAccountNumber.getEditText().setText(accountTableObj.getaccountNumber());
-             currntBalance.getEditText().setText(String.valueOf(accountTableObj.getBalance()));
+            RealmQuery<AccountTable> realmQuery = realm.where(AccountTable.class)
+                    .equalTo("accountId", primarykey);
+            AccountTable accountTableObj = realmQuery.findAll().first();
 
-             //account spinner
-             if (accountTableObj.getAccountType().equalsIgnoreCase("Cash"))
-             {
-                 accountTypeSpinner.setSelection(1);
-             }
-             else if (accountTableObj.getAccountType().equalsIgnoreCase("Bank"))
-             {
-                 accountTypeSpinner.setSelection(2);
-             }else if (accountTableObj.getAccountType().equalsIgnoreCase("Credit"))
-             {
-                 accountTypeSpinner.setSelection(3);
-             }
+            accountName.getEditText().setText(accountTableObj.getAccountName());
+            bankAccountNumber.getEditText().setText(accountTableObj.getaccountNumber());
+            currntBalance.getEditText().setText(String.valueOf(accountTableObj.getBalance()));
 
-             // currency spinner
-             if (accountTableObj.getCurrencyType().equalsIgnoreCase("INR(₹)"))
-             {
-                 currency_spinner.setSelection(1);
-             }
-           //  selectedDate = accountTableObj.getDateType();
+            //account spinner
+            if (accountTableObj.getAccountType().equalsIgnoreCase("Cash")) {
+                accountTypeSpinner.setSelection(1);
+            } else if (accountTableObj.getAccountType().equalsIgnoreCase("Bank")) {
+                accountTypeSpinner.setSelection(2);
+            } else if (accountTableObj.getAccountType().equalsIgnoreCase("Credit")) {
+                accountTypeSpinner.setSelection(3);
+            }
 
-         }
+            // currency spinner
+            if (accountTableObj.getCurrencyType().equalsIgnoreCase("INR(₹)")) {
+                currency_spinner.setSelection(1);
+            }
+            //  selectedDate = accountTableObj.getDateType();
+
+        } else {
+            currntBalance.getEditText().setEnabled(true);
+            accountTypeSpinner.setEnabled(true);
+        }
 
 
         submitButton.setOnClickListener(new View.OnClickListener() {
@@ -106,9 +104,10 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
             public void onClick(View v) {
                 if (validationSuccess()) {
 
-                    if (activity.equalsIgnoreCase("Edit"))
-                    {
-                        Toast.makeText(getApplicationContext(),"Account Details Updated Succesfully", Toast.LENGTH_LONG).show();
+                    if (activity.equalsIgnoreCase("Edit")) {
+                        Toast.makeText(getApplicationContext(), "Account Details Updated Succesfully", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Account Details Added Succesfully", Toast.LENGTH_LONG).show();
                     }
 
 
@@ -116,11 +115,9 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
 
                     long nextId;
 
-                    if (activity.equalsIgnoreCase("Edit"))
-                    {
+                    if (activity.equalsIgnoreCase("Edit")) {
                         nextId = primarykey;
-                    }
-                    else {
+                    } else {
                         Number current_id = realm.where(AccountTable.class).max("accountId");
                         if (current_id == null) {
                             nextId = 1;
@@ -136,15 +133,15 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
                     AccountTableModelObj.setAccountName(accountName.getEditText().getText().toString());
                     AccountTableModelObj.setaccountNumber(bankAccountNumber.getEditText().getText().toString());
                     AccountTableModelObj.setBalance(Double.parseDouble(currntBalance.getEditText().getText().toString()));
-                //    AccountTableModelObj.setDateType(selectedDate);
+                    //    AccountTableModelObj.setDateType(selectedDate);
 
 
                     realm.executeTransaction(new Realm.Transaction() {
                         @Override
                         public void execute(Realm realm) {
-                            realm.copyToRealm(AccountTableModelObj);
+                            realm.insertOrUpdate(AccountTableModelObj);
                             //showData();
-                            showTransactionsListActivity();
+                            showAccountListActivity();
                         }
                     });
 
@@ -182,7 +179,7 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
         if (accountTypeSpinner.getSelectedItemPosition() == 0) {
             Toast.makeText(getApplicationContext(), "Please enter account type", Toast.LENGTH_SHORT).show();
             return false;
-        } else {
+        } else if (!activity.equalsIgnoreCase("Edit")) {
             RealmQuery<AccountTable> accountTableResults = realm.where(AccountTable.class)
                     .equalTo("accountType", accountTypeSpinner.getSelectedItem().toString());
             if (accountTableResults.count() > 0) {
@@ -207,11 +204,12 @@ public class NewAccountActivity extends AppCompatActivity implements AdapterView
         }
     }
 
-    private void showTransactionsListActivity() {
+    private void showAccountListActivity() {
         Intent accountListActivity = new Intent(this, AccountListActivity.class);
-        accountListActivity.putExtra("ActivityName","Accounts");
+        accountListActivity.putExtra("ActivityName", "Accounts");
         startActivity(accountListActivity);
     }
+
     public void onBackPressed() {
         super.onBackPressed();
         this.finish();

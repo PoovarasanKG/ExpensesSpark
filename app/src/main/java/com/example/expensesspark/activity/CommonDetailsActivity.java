@@ -170,12 +170,18 @@ public class CommonDetailsActivity extends AppCompatActivity {
         edit_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), AddTransaction.class);
-                i.putExtra("Activity", "Edit");
-                i.putExtra("transactionId", primaryKey);
-                i.putExtra("ActivityType", activityName);
-                startActivity(i);
-
+                if (activityName.equals("AccountListActivity")) {
+                    Intent i = new Intent(getApplicationContext(), NewAccountActivity.class);
+                    i.putExtra("Activity", "Edit");
+                    i.putExtra("accountId", primaryKey);
+                    startActivity(i);
+                }else if (activityName.equals("TransactionListActivity")) {
+                    Intent i = new Intent(getApplicationContext(), AddTransaction.class);
+                    i.putExtra("Activity", "Edit");
+                    i.putExtra("transactionId", primaryKey);
+                    i.putExtra("ActivityType", activityName);
+                    startActivity(i);
+                }
             }
         });
 

@@ -40,6 +40,7 @@ public class MyApplication extends Application {
             notificationManager.createNotificationChannel(channel);
         }
     }
+
 }
 
 //    RealmResults<User> results = realm.where(User.class).findAll();

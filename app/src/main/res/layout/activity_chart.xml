@@ -6,9 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".activity.ChartActivity">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/shareBtn"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="25dp"
+        android:clickable="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/piechart"
+        app:srcCompat="?attr/actionModeShareDrawable" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/piechart"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,25 +46,986 @@
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/piechart"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="300dp"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/allegendScroll"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout">
 
     </com.github.mikephil.charting.charts.PieChart>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/shareBtn"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
-        android:clickable="true"
-        app:layout_constraintBottom_toBottomOf="@+id/piechart"
-        app:layout_constraintEnd_toEndOf="@+id/piechart"
-        app:srcCompat="?attr/actionModeShareDrawable" />
+    <ScrollView
+        android:id="@+id/allegendScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/piechart"
+        tools:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/allChartTV"
+                        style="@android:style/TextAppearance.Material.Subhead"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="Chart Legend View" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/allChartIncomeColor"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/Blue_water"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/allChartIncomeTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Income"
+                            android:textColor="@color/darkTextColor"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/allChartExpenseColor"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/red_600"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/allChartExpenseTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Expense"
+                            android:textColor="@color/darkTextColor"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/incomeLegendScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/piechart"
+        tools:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/incomeChartTV"
+                        style="@android:style/TextAppearance.Material.Subhead"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="Chart Legend View" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartFodanddrinkColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/Yellow"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartFodanddrinkTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Food&amp;Drinks"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartShoppingColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/Light_green"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartShoppingTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Shopping"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartTransporationColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartTransporationTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Transporation"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartVehicleColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/color_one"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartVechicleTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Vechicle"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartLifeandEntertainmentColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/accent"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartLifeandEntertainmentTv"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Life&amp;Entertainment"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartHousingColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/Blue_water"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartHousingTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Housing"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartCommunicationColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/green_500"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartCommunicationTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Communication"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartFinancialExpensesColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/purple_500"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartFinancialExpensesTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Finansial Expenses"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartInvestmentsColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/black"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartInvestmentsTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Investments"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartIncomeColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/colorAccent"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartIncomeTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Income"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/incomeChartOthersColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/red_200"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/incomeChartOthersTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Others"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/expenseLegendScroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/piechart"
+        tools:visibility="invisible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/expenseChartTV"
+                        style="@android:style/TextAppearance.Material.Subhead"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:text="Chart Legend View" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartFodanddrinkColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/Yellow"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartFodanddrinkTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Food&amp;Drinks"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartShoppingColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/Light_green"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartShoppingTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Shopping"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartTransporationColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/colorPrimary"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartTransporationTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Transporation"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartVehicleColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/color_one"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartVechicleTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Vechicle"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartLifeandEntertainmentColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/accent"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartLifeandEntertainmentTv"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Life&amp;Entertainment"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartHousingColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/Blue_water"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartHousingTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Housing"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartCommunicationColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/green_500"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartCommunicationTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Communication"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartFinancialExpensesColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/purple_500"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartFinancialExpensesTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Finansial Expenses"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartInvestmentsColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/black"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartInvestmentsTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Investments"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartIncomeColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/colorAccent"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartIncomeTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Income"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="8dp"
+                        android:background="#FFFFFF"
+                        android:backgroundTint="#E9E9E9"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/expenseChartOthersColr"
+                            style="@style/TextAppearance.MyTheme.Body1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@color/red_200"
+                            android:gravity="center"
+                            android:textColor="@color/color_white" />
+
+                        <TextView
+                            android:id="@+id/expenseChartOthersTV"
+                            style="@style/TextAppearance.AppCompat.Subhead"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:text="Others"
+                            android:textColor="@color/darkTextColor" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

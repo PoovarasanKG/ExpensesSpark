@@ -65,6 +65,19 @@ public class TransactionsListActivity extends AppCompatActivity {
                     .equalTo("transactionType", "Expense")
                     .findAll().sort("dateType", Sort.DESCENDING);
 
+            List<TransactionTable> expenseCreditransactionTableList = realm.where(TransactionTable.class)
+                    .findAll().sort("dateType", Sort.DESCENDING);
+
+            // Integer index = 0;
+            //   for (TransactionTable transactionTableListObj : expenseCreditransactionTableList) {
+            //      if (transactionTableListObj.getTransactionType().equalsIgnoreCase("Expense") || transactionTableListObj.getTransactionType().equalsIgnoreCase("Credit"))
+            //     {
+            //          transactionTableList.add(index,transactionTableListObj);
+            //         index++;
+            //    }
+            //   }
+
+
             //BIND
             adapter = new TransactionTableAdapter(transactionTableList, activityName);
             recyclerView.setAdapter(adapter);
@@ -78,6 +91,7 @@ public class TransactionsListActivity extends AppCompatActivity {
                 Intent addTransaction = new Intent(getApplicationContext(), AddTransaction.class);
                 addTransaction.putExtra("Activity", "Add");
                 addTransaction.putExtra("ActivityType", "");
+                addTransaction.putExtra("transactionId", 0);
                 startActivity(addTransaction);
             }
         });

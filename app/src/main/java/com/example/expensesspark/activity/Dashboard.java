@@ -78,7 +78,7 @@ public class Dashboard extends AppCompatActivity {
         }
 
         //notifi in acc settings
-        scheduleNotification(getNotification( "1 second delay" ), 1000);
+        scheduleNotification(getNotification( "10 second delay" ), 10000);
 
         showDashboardDetails();
         sendNotification();

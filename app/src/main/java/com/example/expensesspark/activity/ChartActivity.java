@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.expensesspark.R;
@@ -23,8 +26,11 @@ import com.example.expensesspark.model.AccountTable;
 import com.example.expensesspark.model.DetailsModel;
 import com.example.expensesspark.model.TransactionTable;
 import com.example.expensesspark.realm.TransactionTableHelper;
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -40,6 +46,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -62,6 +69,12 @@ public class ChartActivity extends AppCompatActivity {
     TabLayout tabLayout;
     File imagePath;
 
+    TextView allChartTV, allChartIncomeColor, allChartIncomeTV, allChartExpenseColor, allChartExpenseTV;
+    TextView incomeChartTV, incomeChartFodanddrinkColr, incomeChartFodanddrinkTV, incomeChartShoppingColr,
+            incomeChartShoppingTV, incomeChartTransportionColr, incomeChartTransportionTV;
+
+    ScrollView allegendScroll, incomeLegendScroll, expenseLegendScroll;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +82,17 @@ public class ChartActivity extends AppCompatActivity {
 
         realm = Realm.getDefaultInstance();
         pieChart = findViewById(R.id.piechart);
+
+        allegendScroll = findViewById(R.id.allegendScroll);
+        // allChartTV = findViewById(R.id.allChartTV); allChartIncomeColor = findViewById(R.id.allChartIncomeColor);
+        //  allChartIncomeTV = findViewById(R.id.allChartIncomeTV);allChartExpenseColor = findViewById(R.id.allChartExpenseColor);
+        //  allChartExpenseTV = findViewById(R.id.allChartExpenseTV);
+        incomeLegendScroll = findViewById(R.id.incomeLegendScroll);
+        //incomeChartTV = findViewById(R.id.incomeChartTV); incomeChartFodanddrinkColr = findViewById(R.id.incomeChartFodanddrinkColr);
+        // incomeChartFodanddrinkTV = findViewById(R.id.incomeChartFodanddrinkTV);incomeChartShoppingColr = findViewById(R.id.incomeChartShoppingColr);
+        // incomeChartShoppingTV = findViewById(R.id.incomeChartShoppingTV);incomeChartTransportionColr = findViewById(R.id.incomeChartTransporationColr);
+        // incomeChartTransportionTV = findViewById(R.id.incomeChartTransporationTV);
+        expenseLegendScroll = findViewById(R.id.expenseLegendScroll);
 
         getAllEntries();
 
@@ -95,7 +119,7 @@ public class ChartActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton share = (FloatingActionButton)findViewById(R.id.shareBtn);
+        FloatingActionButton share = (FloatingActionButton) findViewById(R.id.shareBtn);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,6 +130,10 @@ public class ChartActivity extends AppCompatActivity {
 
     // Load Chart Methods
     private void getAllEntries() {
+
+        allegendScroll.setVisibility(View.VISIBLE);
+        incomeLegendScroll.setVisibility(View.INVISIBLE);
+        expenseLegendScroll.setVisibility(View.INVISIBLE);
 
         Date startDate = getDateRange().first;
         Date endDate = getDateRange().second;
@@ -138,19 +166,42 @@ public class ChartActivity extends AppCompatActivity {
         pieEntries = new ArrayList<>();
         pieEntries.add(new PieEntry((float) income, 0));
         pieEntries.add(new PieEntry((float) expense, 1));
-       // pieEntries.add(new PieEntry((float) transfer, 2));
+        // pieEntries.add(new PieEntry((float) transfer, 2));
 
         pieDataSet = new PieDataSet(pieEntries, "Income, Expense");
         pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieDataSet.setColors(new int[]{R.color.Blue_water, R.color.red_600}, getApplicationContext());
+        //pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         pieDataSet.setSliceSpace(2f);
         pieDataSet.setValueTextColor(R.color.white);
-        pieDataSet.setValueTextSize(10f);
+        pieDataSet.setValueTextSize(13f);
         pieDataSet.setSliceSpace(5f);
+
+        pieDataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        pieData.setValueTextColor(Color.BLACK);
+        pieDataSet.setValueLinePart1OffsetPercentage(10.f);
+        pieDataSet.setValueLinePart1Length(0.43f);
+        pieDataSet.setValueLinePart2Length(.1f);
+        pieDataSet.setValueTextColor(Color.BLACK);
+        pieChart.setEntryLabelColor(Color.BLUE);
+
+        pieChart.setExtraBottomOffset(10f);
+        pieChart.setExtraLeftOffset(8f);
+        pieChart.setExtraRightOffset(10f);
+
+        pieChart.getLegend().setWordWrapEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.getDescription().setEnabled(false);
+
     }
 
     private void getIncomeEntries() {
+
+        allegendScroll.setVisibility(View.INVISIBLE);
+        incomeLegendScroll.setVisibility(View.VISIBLE);
+        expenseLegendScroll.setVisibility(View.INVISIBLE);
+
         Date startDate = getDateRange().first;
         Date endDate = getDateRange().second;
 
@@ -164,121 +215,130 @@ public class ChartActivity extends AppCompatActivity {
         //TransactionTableHelper helper = new TransactionTableHelper(realm);
         //List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
 
-        double food, shopping, vehicle, transfer, Life, Housing, Communication, FinancialExpenses, Income, Investments, Others;
-        food = 0;
+        double foodAndDrinks, shopping, Transporation, vehicle,  LifeAndEntertainment, Housing, Communication, FinancialExpenses, Investments, Income,  Others;
+        foodAndDrinks = 0;
         shopping = 0;
+        Transporation = 0;
         vehicle = 0;
-        transfer = 0;
-        Life = 0;
+        LifeAndEntertainment = 0;
         Housing = 0;
         Communication = 0;
         FinancialExpenses = 0;
-        Income = 0;
         Investments = 0;
+        Income = 0;
         Others = 0;
 
         for (TransactionTable transactionTableListObj : transactionTableList) {
-            if (transactionTableListObj.getCategory().equals("Food And Drinks"))
-            {
-                food = food + transactionTableListObj.getAmount();
+            if (transactionTableListObj.getCategory().equals("Food And Drinks")) {
+                foodAndDrinks = foodAndDrinks + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Shopping")) {
                 shopping = shopping + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Transportation")) {
+                Transporation = Transporation + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Vehicle")) {
                 vehicle = vehicle + transactionTableListObj.getAmount();
-            } else if (transactionTableListObj.getCategory().equals("Transportation")) {
-                transfer = transfer + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Life And Entertainment")) {
-                Life = Life + transactionTableListObj.getAmount();
+                LifeAndEntertainment = LifeAndEntertainment + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Housing")) {
                 Housing = Housing + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Communication")) {
                 Communication = Communication + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Financial Expenses")) {
                 FinancialExpenses = FinancialExpenses + transactionTableListObj.getAmount();
+            }else if (transactionTableListObj.getCategory().equals("Investments")) {
+                Investments = Investments + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Income")) {
                 Income = Income + transactionTableListObj.getAmount();
-            } else if (transactionTableListObj.getCategory().equals("Investments")) {
-                Investments = Investments + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Others")) {
                 Others = Others + transactionTableListObj.getAmount();
             }
         }
 
         pieChart.invalidate();
-
         pieEntries = new ArrayList<>();
-
         int dataInsertPosition = 0;
 
-        if (food != 0)
-        {
-            pieEntries.add(new PieEntry((float) food, dataInsertPosition));
+        if (foodAndDrinks != 0) {
+            pieEntries.add(new PieEntry((float) foodAndDrinks, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
 
-        if (shopping != 0)
-        {
+        if (shopping != 0) {
             pieEntries.add(new PieEntry((float) shopping, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (vehicle != 0)
-        {
+        if (vehicle != 0) {
             pieEntries.add(new PieEntry((float) vehicle, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (transfer != 0)
-        {
-            pieEntries.add(new PieEntry((float) transfer, dataInsertPosition));
+        if (Transporation != 0) {
+            pieEntries.add(new PieEntry((float) Transporation, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (Life != 0)
-        {
-            pieEntries.add(new PieEntry((float) Life, dataInsertPosition));
+        if (LifeAndEntertainment != 0) {
+            pieEntries.add(new PieEntry((float) LifeAndEntertainment, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (Housing != 0)
-        {
+        if (Housing != 0) {
             pieEntries.add(new PieEntry((float) Housing, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (Communication != 0)
-        {
+        if (Communication != 0) {
             pieEntries.add(new PieEntry((float) Communication, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (FinancialExpenses != 0)
-        {
+        if (FinancialExpenses != 0) {
             pieEntries.add(new PieEntry((float) FinancialExpenses, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (Income != 0)
-        {
-            pieEntries.add(new PieEntry((float) Income, dataInsertPosition));
-            dataInsertPosition = dataInsertPosition + 1;
-        }
-        if (Investments != 0)
-        {
+        if (Investments != 0) {
             pieEntries.add(new PieEntry((float) Investments, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (Others != 0)
-        {
+        if (Income != 0) {
+            pieEntries.add(new PieEntry((float) Income, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+
+        if (Others != 0) {
             pieEntries.add(new PieEntry((float) Others, dataInsertPosition));
         }
 
-        pieDataSet = new PieDataSet(pieEntries, "Food And Drinks, Shopping, Vehicle, transfer, Life, Housing, Communication, FinancialExpenses, Income, Investments, Others");
+        pieDataSet = new PieDataSet(pieEntries, "Food And Drinks, Shopping, Transporation, Vehicle, Life And Entertainment, Housing, Communication, FinancialExpenses, Investments, Income, Others");
         pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
-        pieChart.invalidate();
-        pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+       // pieChart.invalidate();
+
+        pieDataSet.setColors(new int[]{R.color.Yellow, R.color.Light_green, R.color.colorPrimary, R.color.color_one,
+                R.color.accent, R.color.Blue_water, R.color.green_500, R.color.purple_500,
+                R.color.black, R.color.colorAccent, R.color.red_200}, getApplicationContext());
+        //  pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+
         pieDataSet.setSliceSpace(2f);
         pieDataSet.setValueTextColor(R.color.white);
-        pieDataSet.setValueTextSize(10f);
+        pieDataSet.setValueTextSize(13f);
         pieDataSet.setSliceSpace(5f);
+
+        pieDataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        pieData.setValueTextColor(Color.BLACK);
+        pieDataSet.setValueLinePart1OffsetPercentage(10.f);
+        pieDataSet.setValueLinePart1Length(0.43f);
+        pieDataSet.setValueLinePart2Length(.1f);
+        pieDataSet.setValueTextColor(Color.BLACK);
+        pieChart.setEntryLabelColor(Color.BLUE);
+
+        pieChart.getLegend().setWordWrapEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.getDescription().setEnabled(false);
 
     }
 
     private void getExpensesEntries() {
+
+        allegendScroll.setVisibility(View.INVISIBLE);
+        incomeLegendScroll.setVisibility(View.INVISIBLE);
+        expenseLegendScroll.setVisibility(View.VISIBLE);
+
         Date startDate = getDateRange().first;
         Date endDate = getDateRange().second;
 
@@ -289,44 +349,43 @@ public class ChartActivity extends AppCompatActivity {
                 .lessThan("dateType", endDate)
                 .findAll().sort("dateType", Sort.ASCENDING);
         //TransactionTableHelper helper = new TransactionTableHelper(realm);
-       // List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
+        // List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
 
-        double food, shopping, vehicle, transfer, Life, Housing, Communication, FinancialExpenses, Income, Investments, Others;
-        food = 0;
+        double foodAndDrinks, shopping, Transporation, vehicle,  LifeAndEntertainment, Housing, Communication, FinancialExpenses, Investments, Income,  Others;
+        foodAndDrinks = 0;
         shopping = 0;
+        Transporation = 0;
         vehicle = 0;
-        transfer = 0;
-        Life = 0;
+        LifeAndEntertainment = 0;
         Housing = 0;
         Communication = 0;
         FinancialExpenses = 0;
-        Income = 0;
         Investments = 0;
+        Income = 0;
         Others = 0;
 
         for (TransactionTable transactionTableListObj : transactionTableList) {
-            if (transactionTableListObj.getCategory().equals("Food And Drinks"))
-            {
-                food = food + transactionTableListObj.getAmount();
+            if (transactionTableListObj.getCategory().equals("Food And Drinks")) {
+                foodAndDrinks = foodAndDrinks + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Shopping")) {
                 shopping = shopping + transactionTableListObj.getAmount();
+            } else if (transactionTableListObj.getCategory().equals("Transportation")) {
+                Transporation = Transporation + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Vehicle")) {
                 vehicle = vehicle + transactionTableListObj.getAmount();
-            } else if (transactionTableListObj.getCategory().equals("Transportation")) {
-                transfer = transfer + transactionTableListObj.getAmount();
-            } else if (transactionTableListObj.getCategory().equals("Life And Entertainment")) {
-                Life = Life + transactionTableListObj.getAmount();
+            }  else if (transactionTableListObj.getCategory().equals("Life And Entertainment")) {
+                LifeAndEntertainment = LifeAndEntertainment + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Housing")) {
                 Housing = Housing + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Communication")) {
                 Communication = Communication + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Financial Expenses")) {
                 FinancialExpenses = FinancialExpenses + transactionTableListObj.getAmount();
-            } else if (transactionTableListObj.getCategory().equals("Income")) {
-                Income = Income + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Investments")) {
                 Investments = Investments + transactionTableListObj.getAmount();
-            } else if (transactionTableListObj.getCategory().equals("Others")) {
+            } else if (transactionTableListObj.getCategory().equals("Income")) {
+                Income = Income + transactionTableListObj.getAmount();
+            }else if (transactionTableListObj.getCategory().equals("Others")) {
                 Others = Others + transactionTableListObj.getAmount();
             }
         }
@@ -335,76 +394,87 @@ public class ChartActivity extends AppCompatActivity {
         pieEntries = new ArrayList<>();
         int dataInsertPosition = 0;
 
-        if (food != 0)
-        {
-            pieEntries.add(new PieEntry((float) food, dataInsertPosition));
+        if (foodAndDrinks != 0) {
+            pieEntries.add(new PieEntry((float) foodAndDrinks, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
 
-        if (shopping != 0)
-        {
+        if (shopping != 0) {
             pieEntries.add(new PieEntry((float) shopping, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (vehicle != 0)
-        {
+        if (Transporation != 0) {
+            pieEntries.add(new PieEntry((float) Transporation, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (vehicle != 0) {
             pieEntries.add(new PieEntry((float) vehicle, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (transfer != 0)
-        {
-            pieEntries.add(new PieEntry((float) transfer, dataInsertPosition));
+        if (LifeAndEntertainment != 0) {
+            pieEntries.add(new PieEntry((float) LifeAndEntertainment, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (Life != 0)
-        {
-            pieEntries.add(new PieEntry((float) Life, dataInsertPosition));
-            dataInsertPosition = dataInsertPosition + 1;
-        }
-        if (Housing != 0)
-        {
+        if (Housing != 0) {
             pieEntries.add(new PieEntry((float) Housing, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (Communication != 0)
-        {
+        if (Communication != 0) {
             pieEntries.add(new PieEntry((float) Communication, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (FinancialExpenses != 0)
-        {
+        if (FinancialExpenses != 0) {
             pieEntries.add(new PieEntry((float) FinancialExpenses, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (Income != 0)
-        {
-            pieEntries.add(new PieEntry((float) Income, dataInsertPosition));
-            dataInsertPosition = dataInsertPosition + 1;
-        }
-        if (Investments != 0)
-        {
+        if (Investments != 0) {
             pieEntries.add(new PieEntry((float) Investments, dataInsertPosition));
             dataInsertPosition = dataInsertPosition + 1;
         }
-        if (Others != 0)
-        {
+        if (Income != 0) {
+            pieEntries.add(new PieEntry((float) Income, dataInsertPosition));
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+        if (Others != 0) {
             pieEntries.add(new PieEntry((float) Others, dataInsertPosition));
         }
 
 
-        pieDataSet = new PieDataSet(pieEntries, "Food And Drinks, Shopping, Vehicle, transfer, Life, Housing, Communication, FinancialExpenses, Income, Investments, Others");
+        pieDataSet = new PieDataSet(pieEntries, "Food And Drinks, Shopping, Transporation, Vehicle, LifeAndEntertainment, Housing, Communication, FinancialExpenses, Investments, Income, Others");
         pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        pieDataSet.setColors(new int[]{R.color.Yellow, R.color.Light_green, R.color.colorPrimary, R.color.color_one,
+                R.color.accent, R.color.Blue_water, R.color.green_500, R.color.purple_500,
+                R.color.black, R.color.colorAccent, R.color.red_200}, getApplicationContext());
+        // pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+
         pieDataSet.setSliceSpace(2f);
         pieDataSet.setValueTextColor(R.color.white);
-        pieDataSet.setValueTextSize(16f);
+        pieDataSet.setValueTextSize(13f);
         pieDataSet.setSliceSpace(5f);
+
+        pieDataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
+        pieData.setValueTextColor(Color.BLACK);
+        pieDataSet.setValueLinePart1OffsetPercentage(10.f);
+        pieDataSet.setValueLinePart1Length(0.43f);
+        pieDataSet.setValueLinePart2Length(.1f);
+        pieDataSet.setValueTextColor(Color.BLACK);
+        pieChart.setEntryLabelColor(Color.BLUE);
+
+        pieChart.setExtraBottomOffset(10f);
+        pieChart.setExtraLeftOffset(10f);
+        pieChart.setExtraRightOffset(10f);
+
+        pieChart.getLegend().setWordWrapEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.getDescription().setEnabled(false);
+
+
     }
 
     // Share Screen Methods
-    private void getPermission()
-    {
+    private void getPermission() {
         if (ContextCompat.checkSelfPermission(ChartActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             //Permission was denied
@@ -412,17 +482,14 @@ public class ChartActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(ChartActivity.this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     501);
-        }
-        else if (ContextCompat.checkSelfPermission(ChartActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
+        } else if (ContextCompat.checkSelfPermission(ChartActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             //Permission was denied
             //Request for permission
             ActivityCompat.requestPermissions(ChartActivity.this,
                     new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     502);
-        }
-        else
-        {
+        } else {
             Bitmap bitmap = takeScreenshot();
             saveBitmap(bitmap);
             shareIt();
@@ -517,5 +584,4 @@ public class ChartActivity extends AppCompatActivity {
         calendar.set(Calendar.SECOND, 59);
         calendar.set(Calendar.MILLISECOND, 999);
     }
-
 }
