@@ -215,7 +215,7 @@ public class ChartActivity extends AppCompatActivity {
         //TransactionTableHelper helper = new TransactionTableHelper(realm);
         //List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
 
-        double foodAndDrinks, shopping, Transporation, vehicle,  LifeAndEntertainment, Housing, Communication, FinancialExpenses, Investments, Income,  Others;
+        double foodAndDrinks, shopping, Transporation, vehicle, LifeAndEntertainment, Housing, Communication, FinancialExpenses, Investments, Income, Others;
         foodAndDrinks = 0;
         shopping = 0;
         Transporation = 0;
@@ -245,7 +245,7 @@ public class ChartActivity extends AppCompatActivity {
                 Communication = Communication + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Financial Expenses")) {
                 FinancialExpenses = FinancialExpenses + transactionTableListObj.getAmount();
-            }else if (transactionTableListObj.getCategory().equals("Investments")) {
+            } else if (transactionTableListObj.getCategory().equals("Investments")) {
                 Investments = Investments + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Income")) {
                 Income = Income + transactionTableListObj.getAmount();
@@ -257,61 +257,81 @@ public class ChartActivity extends AppCompatActivity {
         pieChart.invalidate();
         pieEntries = new ArrayList<>();
         int dataInsertPosition = 0;
+        int[] colors = new int[11];
 
         if (foodAndDrinks != 0) {
             pieEntries.add(new PieEntry((float) foodAndDrinks, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.Yellow;
             dataInsertPosition = dataInsertPosition + 1;
         }
 
         if (shopping != 0) {
             pieEntries.add(new PieEntry((float) shopping, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.Light_green;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (vehicle != 0) {
             pieEntries.add(new PieEntry((float) vehicle, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.colorPrimary;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Transporation != 0) {
             pieEntries.add(new PieEntry((float) Transporation, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.color_one;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (LifeAndEntertainment != 0) {
             pieEntries.add(new PieEntry((float) LifeAndEntertainment, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.accent;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Housing != 0) {
             pieEntries.add(new PieEntry((float) Housing, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.Blue_water;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Communication != 0) {
             pieEntries.add(new PieEntry((float) Communication, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.green_500;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (FinancialExpenses != 0) {
             pieEntries.add(new PieEntry((float) FinancialExpenses, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.purple_500;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Investments != 0) {
             pieEntries.add(new PieEntry((float) Investments, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.black;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Income != 0) {
             pieEntries.add(new PieEntry((float) Income, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.colorAccent;
             dataInsertPosition = dataInsertPosition + 1;
         }
 
         if (Others != 0) {
             pieEntries.add(new PieEntry((float) Others, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.red_200;
+            dataInsertPosition = dataInsertPosition + 1;
+        }
+
+        int[] finalColors = new int[dataInsertPosition];
+
+        for (int i = 0; i < (dataInsertPosition); i++) {
+            finalColors[i] = colors[i];
         }
 
         pieDataSet = new PieDataSet(pieEntries, "Food And Drinks, Shopping, Transporation, Vehicle, Life And Entertainment, Housing, Communication, FinancialExpenses, Investments, Income, Others");
         pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
-       // pieChart.invalidate();
+        pieDataSet.setColors(finalColors, getApplicationContext());
+        // pieChart.invalidate();
 
-        pieDataSet.setColors(new int[]{R.color.Yellow, R.color.Light_green, R.color.colorPrimary, R.color.color_one,
-                R.color.accent, R.color.Blue_water, R.color.green_500, R.color.purple_500,
-                R.color.black, R.color.colorAccent, R.color.red_200}, getApplicationContext());
+        // pieDataSet.setColors(new int[]{R.color.Yellow, R.color.Light_green, R.color.colorPrimary, R.color.color_one,
+        //        R.color.accent, R.color.Blue_water, R.color.green_500, R.color.purple_500,
+        //        R.color.black, R.color.colorAccent, R.color.red_200}, getApplicationContext());
         //  pieDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 
         pieDataSet.setSliceSpace(2f);
@@ -330,7 +350,6 @@ public class ChartActivity extends AppCompatActivity {
         pieChart.getLegend().setWordWrapEnabled(false);
         pieChart.getLegend().setEnabled(false);
         pieChart.getDescription().setEnabled(false);
-
     }
 
     private void getExpensesEntries() {
@@ -351,7 +370,7 @@ public class ChartActivity extends AppCompatActivity {
         //TransactionTableHelper helper = new TransactionTableHelper(realm);
         // List<TransactionTable> transactionTableList = helper.retrieveTransactionTableItems();
 
-        double foodAndDrinks, shopping, Transporation, vehicle,  LifeAndEntertainment, Housing, Communication, FinancialExpenses, Investments, Income,  Others;
+        double foodAndDrinks, shopping, Transporation, vehicle, LifeAndEntertainment, Housing, Communication, FinancialExpenses, Investments, Income, Others;
         foodAndDrinks = 0;
         shopping = 0;
         Transporation = 0;
@@ -364,6 +383,7 @@ public class ChartActivity extends AppCompatActivity {
         Income = 0;
         Others = 0;
 
+
         for (TransactionTable transactionTableListObj : transactionTableList) {
             if (transactionTableListObj.getCategory().equals("Food And Drinks")) {
                 foodAndDrinks = foodAndDrinks + transactionTableListObj.getAmount();
@@ -373,7 +393,7 @@ public class ChartActivity extends AppCompatActivity {
                 Transporation = Transporation + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Vehicle")) {
                 vehicle = vehicle + transactionTableListObj.getAmount();
-            }  else if (transactionTableListObj.getCategory().equals("Life And Entertainment")) {
+            } else if (transactionTableListObj.getCategory().equals("Life And Entertainment")) {
                 LifeAndEntertainment = LifeAndEntertainment + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Housing")) {
                 Housing = Housing + transactionTableListObj.getAmount();
@@ -385,7 +405,7 @@ public class ChartActivity extends AppCompatActivity {
                 Investments = Investments + transactionTableListObj.getAmount();
             } else if (transactionTableListObj.getCategory().equals("Income")) {
                 Income = Income + transactionTableListObj.getAmount();
-            }else if (transactionTableListObj.getCategory().equals("Others")) {
+            } else if (transactionTableListObj.getCategory().equals("Others")) {
                 Others = Others + transactionTableListObj.getAmount();
             }
         }
@@ -393,60 +413,79 @@ public class ChartActivity extends AppCompatActivity {
         pieChart.invalidate();
         pieEntries = new ArrayList<>();
         int dataInsertPosition = 0;
+        int[] colors = new int[11];
 
         if (foodAndDrinks != 0) {
             pieEntries.add(new PieEntry((float) foodAndDrinks, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.Yellow;
             dataInsertPosition = dataInsertPosition + 1;
         }
 
         if (shopping != 0) {
             pieEntries.add(new PieEntry((float) shopping, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.Light_green;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Transporation != 0) {
             pieEntries.add(new PieEntry((float) Transporation, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.colorPrimary;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (vehicle != 0) {
             pieEntries.add(new PieEntry((float) vehicle, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.color_one;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (LifeAndEntertainment != 0) {
             pieEntries.add(new PieEntry((float) LifeAndEntertainment, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.accent;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Housing != 0) {
             pieEntries.add(new PieEntry((float) Housing, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.Blue_water;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Communication != 0) {
             pieEntries.add(new PieEntry((float) Communication, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.green_500;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (FinancialExpenses != 0) {
             pieEntries.add(new PieEntry((float) FinancialExpenses, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.purple_500;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Investments != 0) {
             pieEntries.add(new PieEntry((float) Investments, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.black;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Income != 0) {
             pieEntries.add(new PieEntry((float) Income, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.colorAccent;
             dataInsertPosition = dataInsertPosition + 1;
         }
         if (Others != 0) {
             pieEntries.add(new PieEntry((float) Others, dataInsertPosition));
+            colors[dataInsertPosition] = R.color.red_200;
+            dataInsertPosition = dataInsertPosition + 1;
         }
 
+        int[] finalColors = new int[dataInsertPosition];
+
+        for (int i = 0; i < (dataInsertPosition); i++) {
+            finalColors[i] = colors[i];
+        }
 
         pieDataSet = new PieDataSet(pieEntries, "Food And Drinks, Shopping, Transporation, Vehicle, LifeAndEntertainment, Housing, Communication, FinancialExpenses, Investments, Income, Others");
         pieData = new PieData(pieDataSet);
         pieChart.setData(pieData);
 
-        pieDataSet.setColors(new int[]{R.color.Yellow, R.color.Light_green, R.color.colorPrimary, R.color.color_one,
-                R.color.accent, R.color.Blue_water, R.color.green_500, R.color.purple_500,
-                R.color.black, R.color.colorAccent, R.color.red_200}, getApplicationContext());
+        pieDataSet.setColors(finalColors, getApplicationContext());
+//        pieDataSet.setColors(new int[]{R.color.Yellow, R.color.Light_green, R.color.colorPrimary, R.color.color_one,
+//                R.color.accent, R.color.Blue_water, R.color.green_500, R.color.purple_500,
+//                R.color.black, R.color.colorAccent, R.color.red_200}, getApplicationContext());
         // pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
 
         pieDataSet.setSliceSpace(2f);
