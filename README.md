@@ -1,17 +1,17 @@
 # ExpensesSpark_V1.0
+Expenses Spark - Mobile Application for Expense Transaction.
 
-
-A movie tickets booking and management application using `Flutter` and `NestJS`.
+A Expenses Spark application using `Java` and `Realm`.
 
 ## Features
-
--   Firebase authentication, socket.io.
+-  Developed an Android-based application to help users manage their income and expense transactions.
+-  Utilized Android's built-in Realm database for data storage.
+-  Implemented Google account login functionality.
+-  Firebase authentication.
 
 ## Screenshots
 
 ### User mobile app
-
-
 <details>
     <summary>View Screenshots</summary>
     <br>
@@ -22,6 +22,4 @@ A movie tickets booking and management application using `Flutter` and `NestJS`.
 |![Screenshot_AccountDetailsPage](https://github.com/PoovarasanKG/ExpensesSpark/assets/77930091/0a647251-1516-4c80-9265-f87884cded51) |![Screenshot_NewTranctionsAddPage](https://github.com/PoovarasanKG/ExpensesSpark/assets/77930091/cbea9c2e-ad5e-4e3a-b736-e6b76ccf6801) |![Screenshot_AccountListPage](https://github.com/PoovarasanKG/ExpensesSpark/assets/77930091/12201f2e-8565-4388-bfb7-334442e37c11)
 | ![Screenshot_TransactionDetailsPage](https://github.com/PoovarasanKG/ExpensesSpark/assets/77930091/dfb5e817-0dfa-4edc-92cf-6d6533a178a6) | ![Screenshot_ReportPage](https://github.com/PoovarasanKG/ExpensesSpark/assets/77930091/434e83b0-8463-4745-907e-768b8fdd329f) | ![Screenshot_ChartPageAll](https://github.com/PoovarasanKG/ExpensesSpark/assets/77930091/88937bfa-9372-4fbd-9a02-4edede639bd0)
 | ![Screenshot_ChartPageIncome](https://github.com/PoovarasanKG/ExpensesSpark/assets/77930091/3a9fc871-c2c5-45aa-b1c5-97a7222f6dbd) | ![Screenshot_ChartPageExpenses](https://github.com/PoovarasanKG/ExpensesSpark/assets/77930091/a7921e71-201e-4ba8-a659-52c554c1251b)| ![Settings 3](https://github.com/PoovarasanKG/ExpensesSpark/assets/77930091/d8be15be-5cef-4f78-8345-17715c28879a)
-
-
 </details>     
